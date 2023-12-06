@@ -1,138 +1,69 @@
+<!-- menghubungkan tampilan ini dengan tampilan admin layout -->
 <?= $this->extend('admin/layout/admin_layout');?>
+<!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content');?>
+
 <div class="page-wrapper">
-<div class="content">
-<div class="page-header">
-<div class="page-title">
-<h4>Product Add</h4>
-<h6>Create new product</h6>
-</div>
-</div>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Tambah Barang</h4>
+                <h6>Form tambah barang</h6>
+            </div>
+        </div>
 
-<div class="card">
-<div class="card-body">
-<div class="row">
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Product Name</label>
-<input type="text">
+        <div class="card">
+            <div class="card-body">
+                <!-- Digunakan pada form yang memerlukan upload file/gambar -->
+                <?= form_open_multipart('barang-store') ?>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Kode Barang</label>
+                                <input type="text" name="kode_barang" id="kode_barang" >
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" name="nama_barang" id="nama_barang">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Jenis Barang</label>
+                                <select class="select" name="jenis_barang" id="jenis_barang">
+                                    <option selected disabled>Pilih Jenis Barang</option>
+                                    <option value="Alat Tulis">Alat Tulis</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Stok Barang</label>
+                                <input type="text" name="stok_barang" id="stok_barang" value="0">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="custom-file-container" data-upload-id="myFirstImage">
+                                <label>Upload (Single File) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                <label class="custom-file-container__custom-file">
+                                    <input type="file" name="foto_barang" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                </label>
+                                <div class="custom-file-container__image-preview"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="submit" class="btn btn-submit me-2" value="submit">
+                            <a href="<?= base_url('barang') ?>" class="btn btn-cancel">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Category</label>
-<select class="select">
-<option>Choose Category</option>
-<option>Computers</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Sub Category</label>
-<select class="select">
-<option>Choose Sub Category</option>
-<option>Fruits</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Brand</label>
-<select class="select">
-<option>Choose Brand</option>
-<option>Brand</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Unit</label>
-<select class="select">
-<option>Choose Unit</option>
-<option>Unit</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>SKU</label>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Minimum Qty</label>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Quantity</label>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-12">
-<div class="form-group">
-<label>Description</label>
-<textarea class="form-control"></textarea>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Tax</label>
-<select class="select">
-<option>Choose Tax</option>
-<option>2%</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Discount Type</label>
-<select class="select">
-<option>Percentage</option>
-<option>10%</option>
-<option>20%</option>
-</select>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label>Price</label>
-<input type="text">
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 col-12">
-<div class="form-group">
-<label> Status</label>
-<select class="select">
-<option>Closed</option>
-<option>Open</option>
-</select>
-</div>
-</div>
-<div class="col-lg-12">
-<div class="form-group">
-<label> Product Image</label>
-<div class="image-upload">
-<input type="file">
-<div class="image-uploads">
-<img src="assets/img/icons/upload.svg" alt="img">
-<h4>Drag and drop a file to upload</h4>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-12">
-<a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
-<a href="productlist.html" class="btn btn-cancel">Cancel</a>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
+<!-- Mengakhiri inisialisasi content pada halaman ini -->
 <?= $this->endSection();?>

@@ -1,4 +1,6 @@
+<!-- menghubungkan tampilan ini dengan tampilan admin layout -->
 <?= $this->extend('admin/layout/admin_layout');?>
+<!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content');?>
 
 <div class="main-wrapper">
@@ -69,4 +71,5 @@
         </div>
     </div>
 </div>
+<!-- Mengakhiri inisialisasi content pada halaman ini -->
 <?= $this->endSection();?>

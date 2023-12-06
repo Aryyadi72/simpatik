@@ -7,21 +7,32 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-// Dashboard
+// Routing menuju dashboard admin
 $routes->get('/dash-admin', 'Dashboard::index');
 
-// Permintaan
+// Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');
 
-// Barang
+// Routing menuju halaman tampil barang
 $routes->get('/barang', 'Barang::index');
+
+// Routing menuju halaman tambah barang
 $routes->get('/barang-masuk', 'Barang::add');
 
-// Users
+// Routing untuk menambahkan data ke database
+$routes->post('/barang-store', 'Barang::store');
+
+// Routing untuk menuju halaman users
 $routes->get('/users', 'Users::index');
 
-// Riwayat Barang Masuk
+// Routing untuk menuju halaman tambah users
+$routes->get('/users-add', 'Users::add');
+
+// Routing untuk menambahkan data ke database
+$routes->post('/users-store', 'Users::store');
+
+// Routing untuk menuju halaman riwayat barang masuk
 $routes->get('/masuk-history', 'BarangMasuk::index');
 
-// Riwayat Barang Keluar
+// Routing untuk menuju halaman riwayat barang keluar
 $routes->get('/keluar-history', 'BarangKeluar::index');

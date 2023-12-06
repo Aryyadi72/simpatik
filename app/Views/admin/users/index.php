@@ -1,4 +1,6 @@
+<!-- menghubungkan tampilan ini dengan tampilan admin layout -->
 <?= $this->extend('admin/layout/admin_layout');?>
+<!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content');?>
 
 <div class="main-wrapper">
@@ -10,7 +12,7 @@
                     <h6>Tabel list pengguna aplikasi</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="add-sales.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah</a>
+                    <a href="<?= base_url('users-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah</a>
                 </div>
             </div>
             <div class="row">
@@ -74,4 +76,5 @@
         </div>
     </div>
 </div>
+<!-- Mengakhiri inisialisasi content pada halaman ini -->
 <?= $this->endSection();?>

@@ -1,4 +1,6 @@
+<!-- menghubungkan tampilan ini dengan tampilan admin layout -->
 <?= $this->extend('admin/layout/admin_layout');?>
+<!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content');?>
 
 <div class="main-wrapper">
@@ -8,9 +10,6 @@
                 <div class="page-title">
                     <h4>List Permintaan Masuk</h4>
                     <h6>Tabel list permintaan masuk</h6>
-                </div>
-                <div class="page-btn">
-                    <a href="add-sales.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Add Sales</a>
                 </div>
             </div>
             <div class="row">
@@ -70,4 +69,5 @@
         </div>
     </div>
 </div>
+<!-- Mengakhiri inisialisasi content pada halaman ini -->
 <?= $this->endSection();?>

@@ -6,9 +6,10 @@ use App\Controllers\BaseController;
 
 class Permintaan extends BaseController
 {
+    // Function untuk menampilkan halaman permintaan masuk
     public function index()
     {
         $title['title'] = "Permintaan Masuk - Admin";
-        return view ('admin/permintaan/index', $title);
+        return view ('admin/permintaan/index', ['title' => $title]);
     }
 }
