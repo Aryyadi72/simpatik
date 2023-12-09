@@ -12,4 +12,10 @@ class Dashboard extends BaseController
         $title['title'] = "Dashboard - Admin";
         return view('admin/admin_dash', ['title' => $title]);
     }
+
+    public function dashboardGuru()
+    {
+        $title['title'] = "Dashboard - Guru";
+        return view('guru/guru_dash', ['title' => $title]);
+    }
 }

@@ -10,6 +10,18 @@ class Permintaan extends BaseController
     public function index()
     {
         $title['title'] = "Permintaan Masuk - Admin";
-        return view ('admin/permintaan/index', ['title' => $title]);
+        return view('admin/permintaan/index', ['title' => $title]);
+    }
+
+    public function permintaanGuru()
+    {
+        $title['title'] = "Tambah Permintaan - Guru";
+        return view('guru/permintaan/index', ['title' => $title]);
+    }
+
+    public function listBarang()
+    {
+        $title['title'] = "List Barang - Guru";
+        return view('guru/permintaan/barang', ['title' => $title]);
     }
 }

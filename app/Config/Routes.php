@@ -12,6 +12,9 @@ $routes->get('/login', 'Auth::index');
 // Routing menuju dashboard admin
 $routes->get('/dash-admin', 'Dashboard::index');
 
+// Routing menuju dashboard guru
+$routes->get('/dash-guru', 'Dashboard::dashboardGuru');
+
 // Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');
 
@@ -38,3 +41,13 @@ $routes->get('/masuk-history', 'BarangMasuk::index');
 
 // Routing untuk menuju halaman riwayat barang keluar
 $routes->get('/keluar-history', 'BarangKeluar::index');
+
+
+// Routing Guru
+// Routing menuju dashboard guru
+$routes->get('/dash-guru', 'Dashboard::dashboardGuru');
+
+// Routing menuju halaman tambah permintaan
+$routes->get('/permintaan-guru', 'Permintaan::permintaanGuru');
+
+$routes->get('/list-barang', 'Permintaan::listBarang');
