@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->get('/login', 'Auth::index');
+
 // Routing menuju dashboard admin
 $routes->get('/dash-admin', 'Dashboard::index');
 
