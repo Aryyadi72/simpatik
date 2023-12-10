@@ -21,7 +21,9 @@ class Permintaan extends BaseController
 
     public function listBarang()
     {
+        $barangModel = new \App\Models\Barang();
+        $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
         $title['title'] = "List Barang - Guru";
-        return view('guru/permintaan/barang', ['title' => $title]);
+        return view('guru/permintaan/barang', ['title' => $title, 'data' => $data]);
     }
 }
