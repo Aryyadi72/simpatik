@@ -9,12 +9,22 @@ class Dashboard extends BaseController
     // Function untuk menampilkan halaman dashboard admin
     public function index()
     {
+        if (session()->get('id') == '') {
+            session()->setFlashdata('gagal', 'Anda belum login');
+            return redirect()->to(base_url('/login'));
+        }
+
         $title['title'] = "Dashboard - Admin";
         return view('admin/admin_dash', ['title' => $title]);
     }
 
     public function dashboardGuru()
     {
+        if (session()->get('id') == '') {
+            session()->setFlashdata('gagal', 'Anda belum login');
+            return redirect()->to(base_url('/login'));
+        }
+
         $title['title'] = "Dashboard - Guru";
         return view('guru/guru_dash', ['title' => $title]);
     }

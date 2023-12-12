@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Users extends Model
+class PermintaanBarang extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'permintaan_barang';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nik', 'nama', 'no_hp', 'email', 'username', 'password', 'level'];
+    protected $allowedFields    = ['kode_permintaan', 'kode_barang', 'jumlah', 'tanggal_permintaan', 'pemohon', 'status', 'keterangan'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,15 +38,10 @@ class Users extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function isExists($condition = [])
+    public function getLatestKodePermintaan()
     {
-        return $this->where($condition)->countAllResults() > 0;
-    }
+        $latestKodePermintaan = $this->db->table('permintaan_barang')->select('kode_permintaan')->orderBy('created_at', 'desc')->limit(1)->get()->getRow();
 
-    public function get_data($username, $password)
-	{
-        return $this->db->table('users')
-        ->where(array('username' => $username, 'password' => $password))
-        ->get()->getRowArray();
-	}
+        return $latestKodePermintaan ? $latestKodePermintaan->kode_permintaan : 'KP00';
+    }
 }

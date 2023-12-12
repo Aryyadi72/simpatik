@@ -11,29 +11,36 @@
             <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/favicon.png') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/animate.css') ?>">
+            <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-datetimepicker.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/plugins/select2/css/select2.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/dataTables.bootstrap4.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome/css/fontawesome.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome/css/all.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+            <link rel="stylesheet" href="<?= base_url('assets/plugins/toastr/toatr.css') ?>">
         </head>
         <body>
             <?= $this->include('admin/layout/admin_header');?>
             <?= $this->include('admin/layout/admin_sidebar');?>
             <?= $this->renderSection('content');?>
 
-        <script src="assets/js/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/js/jquery.slimscroll.min.js"></script>
-        <script src="assets/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
-        <script src="assets/plugins/apexchart/chart-data.js"></script>
-        <script src="assets/plugins/select2/js/select2.min.js"></script>
-        <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
-        <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
-        <script src="assets/js/script.js"></script>
-        <script src="assets/plugins/fileupload/fileupload.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/jquery-3.6.0.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/feather.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/jquery.slimscroll.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/jquery.dataTables.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/dataTables.bootstrap4.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/bootstrap.bundle.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/apexchart/apexcharts.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/apexchart/chart-data.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/select2/js/select2.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/sweetalert/sweetalerts.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/script.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/fileupload/fileupload.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/moment.min.js"></script>
+            <script src="<?= base_url('') ?>assets/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.min.js"></script>
+            <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.js"></script>
+
     </body>
 </html>

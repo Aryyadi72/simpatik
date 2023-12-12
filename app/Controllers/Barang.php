@@ -86,4 +86,66 @@ class Barang extends BaseController
 
     }
 
+    public function updateForm($id)
+    {
+        $barangModel = new \App\Models\Barang();
+        $data['barang'] = $barangModel->find($id);
+        $title['title'] = "Ubah Barang - Admin";
+
+        return view('admin/barang/update', ['title' => $title, 'data' => $data]);
+    }
+
+    public function update()
+    {
+        $barangModel = new \App\Models\Barang();
+
+        $id = $this->request->getPost('id');
+        $namaBarang = $this->request->getPost('nama_barang');
+        $jenisBarang = $this->request->getPost('jenis_barang');
+
+        $image = $this->request->getFile('foto_barang');
+
+        if ($image->isValid() && !$image->hasMoved()) {
+            $filename = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/uploads', $filename);
+
+            $updatedData = [
+                'nama_barang' => $namaBarang,
+                'jenis_barang' => $jenisBarang,
+                'foto_barang' => 'uploads/' . $filename,
+            ];
+        } else {
+            $updatedData = [
+                'nama_barang' => $namaBarang,
+                'jenis_barang' => $jenisBarang,
+            ];
+        }
+
+        $barangModel->update($id, $updatedData);
+
+        return redirect()->to(base_url('barang'))->with('success', 'Data updated successfully');
+    }
+
+    public function delete($id)
+    {
+        $barangModel = new \App\Models\Barang();
+        $barang = $barangModel->find($id);
+
+        if ($barang) {
+            $namaFile = $barang['foto_barang'];
+
+            $pathToFile = ROOTPATH . 'public/' . $namaFile;
+            if (file_exists($pathToFile)) {
+                unlink($pathToFile);
+            }
+
+            // dd($pathToFile);
+
+            $barangModel->delete($id);
+
+            return redirect()->to(base_url('barang'))->with('success', 'Data berhasil dihapus');
+        }
+
+    }
+
 }

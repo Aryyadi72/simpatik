@@ -54,13 +54,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no=1; ?>
+                                        <?php foreach($data['barang'] as $barang): ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $barang['tanggal_masuk'] ?></td>
+                                            <td><?= $barang['nama_barang'] ?></td>
+                                            <td><?= $barang['jumlah'] ?></td>
+                                            <td><?= $barang['inputer'] ?></td>
                                         </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

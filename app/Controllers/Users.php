@@ -25,24 +25,53 @@ class Users extends BaseController
     // Function untuk menambahkan data users kedalam database
     public function store()
     {
-        // Memanggil model Users
-        $usersModel = new \App\Models\Users();
+        $userModel = new \App\Models\Users();
 
-        // Mengambil data dari form yang ada di view dan memasukkannya kedalam variabel $data
+        // Ambil data dari form
+        $nik        = $this->request->getPost('nik');
+        $nama       = $this->request->getPost('nama');
+        $phone      = $this->request->getPost('no_hp');
+        $email      = $this->request->getPost('email');
+        $username   = $this->request->getPost('username');
+        $password   = $this->request->getPost('password');
+        $level      = $this->request->getPost('level');
+
+        // Cek apakah NIK, Email, Phone, dan Username sudah ada
+        if ($userModel->isExists(['nik' => $nik])) {
+            return redirect()->back()->withInput()->with('error', 'NIK sudah digunakan.');
+        }
+
+        if ($userModel->isExists(['email' => $email])) {
+            return redirect()->back()->withInput()->with('error', 'Email sudah digunakan.');
+        }
+
+        if ($userModel->isExists(['no_hp' => $phone])) {
+            return redirect()->back()->withInput()->with('error', 'Nomor HP sudah digunakan.');
+        }
+
+        if ($userModel->isExists(['username' => $username])) {
+            return redirect()->back()->withInput()->with('error', 'Username sudah digunakan.');
+        }
+
+        // Hash password sebelum menyimpan ke database
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Data yang akan disimpan ke dalam database
         $data = [
-            'nik'       => $this->request->getVar('nik'),
-            'nama'      => $this->request->getVar('nama'),
-            'no_hp'     => $this->request->getVar('no_hp'),
-            'email'     => $this->request->getVar('email'),
-            'username'  => $this->request->getVar('username'),
-            'password'  => $this->request->getVar('password'),
-            'level'     => $this->request->getVar('level'),
+            'nik' => $nik,
+            'nama' => $nama,
+            'no_hp' => $phone,
+            'email' => $email,
+            'username' => $username,
+            'password' => $hashedPassword,
+            'level' => $level,
+            // ... tambahkan data lainnya sesuai kebutuhan
         ];
 
-        // Menambahkan data yang ada di dalam $data kedalam database
-        $usersModel->insert($data);
+        // Simpan data ke dalam database
+        $userModel->insert($data);
 
-        // Mengarahkan tampilan ke halaman users dengan menggunakan routing users
-        return redirect()->to(site_url('/users'));
+        // Redirect ke halaman lain atau tampilkan pesan sukses
+        return redirect()->to(site_url('/users'))->with('success', 'Data user berhasil ditambahkan.');
     }
 }

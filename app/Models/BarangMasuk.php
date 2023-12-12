@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Users extends Model
+class BarangMasuk extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'barang_masuk';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nik', 'nama', 'no_hp', 'email', 'username', 'password', 'level'];
+    protected $allowedFields    = ['kode_barang', 'jumlah', 'tanggal_masuk', 'inputer'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,15 +38,12 @@ class Users extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function isExists($condition = [])
+    public function getAllBarang()
     {
-        return $this->where($condition)->countAllResults() > 0;
+        $builder = $this->db->table('barang_masuk');
+        $builder->select('barang_masuk.*, barang.*');
+        $builder->join('barang', 'barang_masuk.kode_barang = barang.kode_barang', 'left');
+        $builder->orderBy('barang_masuk.id', 'DESC');
+        return $builder->get()->getResultArray();
     }
-
-    public function get_data($username, $password)
-	{
-        return $this->db->table('users')
-        ->where(array('username' => $username, 'password' => $password))
-        ->get()->getRowArray();
-	}
 }

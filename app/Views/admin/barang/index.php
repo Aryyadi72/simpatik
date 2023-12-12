@@ -12,7 +12,7 @@
                     <h6>Tabel list barang</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="<?= base_url('barang-masuk') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah</a>
+                    <a href="<?= base_url('barang-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah</a>
                 </div>
             </div>
             <div class="row">
@@ -78,8 +78,8 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td class="text-center">
-                                                <a href="" class="btn btn-warning"><i class="fa fa-edit" data-bs-toggle="tooltip" title="Ubah Data"></i></a>
-                                                <a href="" class="btn btn-danger"><i class="fa fa-trash" data-bs-toggle="tooltip" title="Hapus Data"></i></a>
+                                                <a href="<?= base_url('barang-ubah/' . $barang['id']) ?>" class="btn btn-warning"><i class="fa fa-edit" data-bs-toggle="tooltip" title="Ubah Data"></i></a>
+                                                <a href="<?= route_to('delete_barang', $barang['id']); ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash" data-bs-toggle="tooltip" title="Hapus"></i></a>
                                             </td>
                                         </tr>
                                         <!-- Mengakhiri perulangan -->
@@ -94,5 +94,6 @@
         </div>
     </div>
 </div>
+
 <!-- Mengakhiri inisialisasi content pada halaman ini -->
 <?= $this->endSection();?>
