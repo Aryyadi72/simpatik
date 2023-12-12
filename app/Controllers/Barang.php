@@ -8,6 +8,7 @@ class Barang extends BaseController
 {
     // Helper bawaan ci4 untuk membuat form
     protected $helpers = ['form'];
+
     // Function untuk menampilkan data barang dari database di halaman barang
     public function index()
     {
@@ -24,6 +25,7 @@ class Barang extends BaseController
         return view('admin/barang/insert', ['title' => $title]);
     }
 
+    // Function untuk membuat kode barang secara random
     private function generateKodeBarang()
     {
         $barangModel = new \App\Models\Barang();
@@ -34,17 +36,20 @@ class Barang extends BaseController
         return $kodeBarang;
     }
 
-    // // Function untuk menambahkan data barang yang dikirimkan dari view ke database
+    // Function untuk menambahkan data barang yang dikirimkan dari view ke database
     public function store()
     {
+        // Meload model barang
         $barangModel = new \App\Models\Barang();
 
         if ($this->request->getMethod() !== 'post') {
             return redirect('index');
         }
 
+        // Meload function generatekodebarang diatas
         $kodeBarang = $this->generateKodeBarang();
 
+        // Melakukan validasi input gambar
         $validationRule = [
             'foto_barang' => [
                 'label' => 'Image File',
@@ -57,6 +62,7 @@ class Barang extends BaseController
         ];
         $validated = $this->validate($validationRule);
 
+        // Jika validasi benar maka masukan data kedalam database
         if ($validated) {
             $namaBarang = $this->request->getPost('nama_barang');
             $jenisBarang = $this->request->getPost('jenis_barang');
@@ -86,6 +92,7 @@ class Barang extends BaseController
 
     }
 
+    // Function untuk menampilkan halaman update barang
     public function updateForm($id)
     {
         $barangModel = new \App\Models\Barang();
@@ -95,6 +102,7 @@ class Barang extends BaseController
         return view('admin/barang/update', ['title' => $title, 'data' => $data]);
     }
 
+    // Function untuk memproses update data barang
     public function update()
     {
         $barangModel = new \App\Models\Barang();
@@ -126,6 +134,7 @@ class Barang extends BaseController
         return redirect()->to(base_url('barang'))->with('success', 'Data updated successfully');
     }
 
+    // Function untuk menghapus data barang
     public function delete($id)
     {
         $barangModel = new \App\Models\Barang();

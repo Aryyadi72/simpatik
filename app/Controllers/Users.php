@@ -9,17 +9,19 @@ class Users extends BaseController
     // Function untuk menampilkan halaman users
     public function index()
     {
+        $usersModel = new \App\Models\Users();
+        $data['user'] = $usersModel->orderBy('id', 'ASC')->findAll();
         // Judul untuk halaman
         $title['title'] = "Users - Admin";
         // mengarahkan tampilan ke halaman users yang berada di dalam folder users dan folder index
-        return view ('admin/users/index', ['title' => $title]);
+        return view('admin/users/index', ['title' => $title, 'data' => $data]);
     }
 
     // Function untuk menampilkan halaman tambah data users
     public function add()
     {
         $title['title'] = "Tambah Users - Admin";
-        return view ('admin/users/insert', ['title' => $title]);
+        return view('admin/users/insert', ['title' => $title]);
     }
 
     // Function untuk menambahkan data users kedalam database
@@ -28,13 +30,13 @@ class Users extends BaseController
         $userModel = new \App\Models\Users();
 
         // Ambil data dari form
-        $nik        = $this->request->getPost('nik');
-        $nama       = $this->request->getPost('nama');
-        $phone      = $this->request->getPost('no_hp');
-        $email      = $this->request->getPost('email');
-        $username   = $this->request->getPost('username');
-        $password   = $this->request->getPost('password');
-        $level      = $this->request->getPost('level');
+        $nik = $this->request->getPost('nik');
+        $nama = $this->request->getPost('nama');
+        $phone = $this->request->getPost('no_hp');
+        $email = $this->request->getPost('email');
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+        $level = $this->request->getPost('level');
 
         // Cek apakah NIK, Email, Phone, dan Username sudah ada
         if ($userModel->isExists(['nik' => $nik])) {

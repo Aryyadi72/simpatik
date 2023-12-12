@@ -18,6 +18,7 @@ class Dashboard extends BaseController
         return view('admin/admin_dash', ['title' => $title]);
     }
 
+    // Function untuk menampilkan halaman dashboard guru
     public function dashboardGuru()
     {
         if (session()->get('id') == '') {

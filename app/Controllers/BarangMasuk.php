@@ -13,17 +13,19 @@ class BarangMasuk extends BaseController
         $data['barang'] = $barangMasukModel->getAllBarang();
 
         $title['title'] = "Riwayat Barang Masuk - Admin";
-        return view ('admin/barang-masuk/index', ['title' => $title, 'data' => $data]);
+        return view('admin/barang-masuk/index', ['title' => $title, 'data' => $data]);
     }
 
+    // Function menampilkan halaman tambah barang masuk
     public function add()
     {
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
         $title['title'] = "Tambah Barang Masuk - Admin";
-        return view ('admin/barang-masuk/insert', ['title' => $title, 'data' => $data]);
+        return view('admin/barang-masuk/insert', ['title' => $title, 'data' => $data]);
     }
 
+    // Function untuk menangani proses tambah barang masuk kedalam database
     public function store()
     {
         $barangMasukModel = new \App\Models\BarangMasuk();
@@ -35,10 +37,10 @@ class BarangMasuk extends BaseController
         $inputer = $this->request->getPost('inputer');
 
         $barangMasukModel->insert([
-            'kode_barang'   => $kodeBarang,
-            'jumlah'        => $jumlahMasuk,
+            'kode_barang' => $kodeBarang,
+            'jumlah' => $jumlahMasuk,
             'tanggal_masuk' => $tanggalMasuk,
-            'inputer'       => $inputer,
+            'inputer' => $inputer,
         ]);
 
         $barang = $barangModel->where('kode_barang', $kodeBarang)->first();
