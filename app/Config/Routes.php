@@ -20,7 +20,7 @@ $routes->get('/dash-guru', 'Dashboard::dashboardGuru');
 // Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');
 
-$routes->get('/barang', 'Barang::index');
+$routes->get('/barang', 'Barang::index', ['as' => 'barang']);
 $routes->get('/barang-add', 'Barang::add');
 $routes->post('/barang-store', 'Barang::store');
 $routes->get('/barang-ubah/(:num)', 'Barang::updateForm/$1');
@@ -29,12 +29,11 @@ $routes->get('barang/delete/(:num)', 'Barang::delete/$1', ['as' => 'delete_baran
 
 // Routing untuk menuju halaman users
 $routes->get('/users', 'Users::index');
-
-// Routing untuk menuju halaman tambah users
 $routes->get('/users-add', 'Users::add');
-
-// Routing untuk menambahkan data ke database
 $routes->post('/users-store', 'Users::store');
+$routes->get('/users-ubah/(:num)', 'Users::updateForm/$1');
+$routes->post('/users-update', 'Users::update');
+$routes->get('users/delete/(:num)', 'Users::delete/$1', ['as' => 'delete_users']);
 
 // Routing untuk menuju halaman riwayat barang masuk
 $routes->get('/masuk-history', 'BarangMasuk::index');

@@ -9,10 +9,12 @@ class Users extends BaseController
     // Function untuk menampilkan halaman users
     public function index()
     {
+        $usersModel = new \App\Models\Users();
+        $data['users'] = $usersModel->orderBy('id', 'ASC')->findAll();
         // Judul untuk halaman
         $title['title'] = "Users - Admin";
         // mengarahkan tampilan ke halaman users yang berada di dalam folder users dan folder index
-        return view ('admin/users/index', ['title' => $title]);
+        return view ('admin/users/index', ['title' => $title, 'data' => $data]);
     }
 
     // Function untuk menampilkan halaman tambah data users
@@ -73,5 +75,69 @@ class Users extends BaseController
 
         // Redirect ke halaman lain atau tampilkan pesan sukses
         return redirect()->to(site_url('/users'))->with('success', 'Data user berhasil ditambahkan.');
+    }
+
+    public function updateForm($id)
+    {
+        $userModel = new \App\Models\Users();
+        $data['users'] = $userModel->find($id);
+        $title['title'] = "Ubah User - Admin";
+
+        return view('admin/users/update', ['title' => $title, 'data' => $data]);
+    }
+
+    public function update()
+    {
+        $userModel = new \App\Models\Users();
+
+        // Ambil data dari form
+        $id = $this->request->getPost('id');
+        $nama = $this->request->getPost('nama');
+        $email = $this->request->getPost('email');
+        $no_hp = $this->request->getPost('no_hp');
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+
+        // Validasi data
+        $rules = [
+            'email' => 'is_unique[users.email,id,' . $id . ']',
+            'no_hp' => 'is_unique[users.no_hp,id,' . $id . ']',
+            'username' => 'is_unique[users.username,id,' . $id . ']',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Hash password
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Data yang akan diupdate
+        $data = [
+            'nama' => $nama,
+            'email' => $email,
+            'no_hp' => $no_hp,
+            'username' => $username,
+            'password' => $hashedPassword,
+        ];
+
+        // Update data ke dalam database
+        $userModel->update($id, $data);
+
+        return redirect()->to('/users')->with('success', 'Data user berhasil diupdate.');
+    }
+
+    public function delete($id)
+    {
+        $userModel = new \App\Models\Users();
+        $userData = $userModel->find($id);
+
+        if (empty($userData)) {
+            return redirect()->to('/users')->with('error', 'User tidak ditemukan.');
+        }
+
+        $userModel->delete($id);
+
+        return redirect()->to('/users')->with('success', 'Data user berhasil dihapus.');
     }
 }

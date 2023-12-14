@@ -55,17 +55,27 @@
                                             <th>No HP</th>
                                             <th>Email</th>
                                             <th>Username</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                        $no=1;
+                                        foreach($data['users'] as $users):
+                                        ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $users['nik'] ?></td>
+                                            <td><?= $users['nama'] ?></td>
+                                            <td><?= $users['no_hp'] ?></td>
+                                            <td><?= $users['email'] ?></td>
+                                            <td><?= $users['username'] ?></td>
+                                            <td>
+                                                <a href="<?= base_url('users-ubah/' . $users['id']) ?>" class="btn btn-warning"><i class="fa fa-edit" data-bs-toggle="tooltip" title="Ubah Data"></i></a>
+                                                <a href="<?= route_to('delete_users' , $users['id']) ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash" data-bs-toggle="tooltip" title="Hapus"></i></a>
+                                            </td>
                                         </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
