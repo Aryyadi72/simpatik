@@ -46,4 +46,14 @@ class PermintaanBarang extends Model
         return $latestKodePermintaan ? $latestKodePermintaan->kode_permintaan : 'KP00';
     }
 
+    public function findByKodePermintaan($kode_permintaan)
+    {
+        return $this->where('kode_permintaan', $kode_permintaan)->findAll();
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo('App\Models\Barang', 'kode_barang', 'kode_barang');
+    }
+
 }

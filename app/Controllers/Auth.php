@@ -26,10 +26,11 @@ class Auth extends BaseController
         if ($user && password_verify($password, $user['password'])) {
             session()->set('username', $user['username']);
             session()->set('nama', $user['nama']);
+            session()->set('level', $user['level']);
             session()->set('id', $user['id']);
 
             if ($user['level'] == 'admin') {
-                return redirect()->to(base_url('/dash-admin'));
+                return redirect()->to(base_url('/'));
             } else {
                 return redirect()->to(base_url('/dash-guru'));
             }

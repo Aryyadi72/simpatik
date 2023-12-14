@@ -5,20 +5,22 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
 
 $routes->get('/login', 'Auth::index');
 $routes->post('/auth-processLogin', 'Auth::processLogin');
 $routes->get('/logout', 'Auth::logout');
 
 // Routing menuju dashboard admin
-$routes->get('/dash-admin', 'Dashboard::index', ['filter' => 'auth']);
+// $routes->get('/dash-admin', 'Dashboard::index', ['filter' => 'auth']);
 
 // Routing menuju dashboard guru
 $routes->get('/dash-guru', 'Dashboard::dashboardGuru', ['filter' => 'auth']);
 
 // Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');
+$routes->get('/permintaan-masuk-detail/(:any)', 'Permintaan::detail/$1');
+$routes->get('update-status-permintaan/(:num)/(:alpha)', 'Permintaan::updateStatusPermintaan/$1/$2');
 
 $routes->get('/barang', 'Barang::index', ['as' => 'barang']);
 $routes->get('/barang-add', 'Barang::add');

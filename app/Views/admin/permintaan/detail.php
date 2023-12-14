@@ -20,28 +20,29 @@
                                 <div class="search-set">
                                     <div class="search-path">
                                         <a class="btn btn-filter" id="filter_search">
-                                            <img src="assets/img/icons/filter.svg" alt="img">
-                                            <span><img src="assets/img/icons/closes.svg" alt="img"></span>
+                                            <img src="<?= base_url() ?>assets/img/icons/filter.svg" alt="img">
+                                            <span><img src="<?= base_url() ?>assets/img/icons/closes.svg"
+                                                    alt="img"></span>
                                         </a>
                                     </div>
                                     <div class="search-input">
-                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
-                                                alt="img"></a>
+                                        <a class="btn btn-searchset"><img
+                                                src="<?= base_url() ?>assets/img/icons/search-white.svg" alt="img"></a>
                                     </div>
                                 </div>
                                 <div class="wordset">
                                     <ul>
                                         <li>
                                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                                    src="assets/img/icons/pdf.svg" alt="img"></a>
+                                                    src="<?= base_url() ?>assets/img/icons/pdf.svg" alt="img"></a>
                                         </li>
                                         <li>
                                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                                    src="assets/img/icons/excel.svg" alt="img"></a>
+                                                    src="<?= base_url() ?>assets/img/icons/excel.svg" alt="img"></a>
                                         </li>
                                         <li>
                                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                                    src="assets/img/icons/printer.svg" alt="img"></a>
+                                                    src="<?= base_url() ?>assets/img/icons/printer.svg" alt="img"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -51,8 +52,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Tanggal</th>
-                                            <th>Nama</th>
+                                            <th>Kode Permintaan</th>
+                                            <th>Barang</th>
+                                            <th>Jumlah</th>
                                             <th>Status</th>
                                             <th>Detail</th>
                                         </tr>
@@ -60,32 +62,24 @@
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $groupedData = [];
-
-                                        // Group data by 'kode_permintaan'
-                                        foreach ($data['permintaan'] as $pm) {
-                                            $kodePermintaan = $pm['kode_permintaan'];
-                                            if (!isset($groupedData[$kodePermintaan])) {
-                                                $groupedData[$kodePermintaan] = $pm;
-                                            }
-                                        }
-
-                                        // Display the grouped data
-                                        foreach ($groupedData as $pm):
+                                        foreach ($data['permintaan'] as $permintaan):
                                             ?>
                                             <tr>
                                                 <td>
                                                     <?= $no++ ?>
                                                 </td>
                                                 <td>
-                                                    <?= $pm['tanggal_permintaan'] ?>
+                                                    <?= $permintaan['kode_permintaan'] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $pm['pemohon'] ?>
+                                                    <?= $permintaan['nama_barang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $permintaan['jumlah'] ?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    $status = $pm['status'];
+                                                    $status = $permintaan['status'];
 
                                                     switch ($status) {
                                                         case 'diajukan':
@@ -94,7 +88,7 @@
                                                         case 'diproses':
                                                             $badgeClass = 'bg-warning';
                                                             break;
-                                                        case 'disetujui':
+                                                        case 'selesai':
                                                             $badgeClass = 'bg-success';
                                                             break;
                                                         case 'dibatalkan':
@@ -105,15 +99,34 @@
                                                             break;
                                                     }
                                                     ?>
-
                                                     <span class="badges <?= $badgeClass ?>">
                                                         <?= $status ?>
                                                     </span>
                                                 </td>
-                                                <td class="d-flex justify-content-center align-items-center">
-                                                    <a href="<?= base_url() ?>permintaan-masuk-detail/<?= $pm['kode_permintaan'] ?>"
-                                                        class="btn btn-info"><i class="fa fa-th"></i></a>
+                                                <td>
+                                                    <?php if ($status === 'diajukan'): ?>
+                                                        <a class="btn btn-warning"
+                                                            href="<?= base_url('update-status-permintaan/' . $permintaan['id'] . '/diproses') ?>">
+                                                            <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger"
+                                                            href="<?= base_url('update-status-permintaan/' . $permintaan['id'] . '/dibatalkan') ?>">
+                                                            <i class="fa fa-ban"></i>
+                                                        </a>
+                                                    <?php elseif ($status === 'diproses'): ?>
+                                                        <a class="btn btn-success"
+                                                            href="<?= base_url('update-status-permintaan/' . $permintaan['id'] . '/selesai') ?>">
+                                                            <i class="fa fa-check"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger"
+                                                            href="<?= base_url('update-status-permintaan/' . $permintaan['id'] . '/dibatalkan') ?>">
+                                                            <i class="fa fa-ban"></i>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <button class="btn btn-secondary btn-sm">Permintaan Selesai</button>
+                                                    <?php endif; ?>
                                                 </td>
+
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>

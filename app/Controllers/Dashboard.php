@@ -22,14 +22,20 @@ class Dashboard extends BaseController
     public function index()
     {
         $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $title['title'] = "Dashboard - Admin";
-        return view('admin/admin_dash', ['title' => $title, 'userId' => $userId]);
+        return view('admin/admin_dash', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menampilkan halaman dashboard guru
     public function dashboardGuru()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
+        $title['title'] = "Dashboard - Admin";
         $title['title'] = "Dashboard - Guru";
-        return view('guru/guru_dash', ['title' => $title]);
+        return view('guru/guru_dash', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 }
