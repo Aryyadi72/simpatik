@@ -1,7 +1,7 @@
 <!-- menghubungkan tampilan ini dengan tampilan admin layout -->
-<?= $this->extend('admin/layout/admin_layout');?>
+<?= $this->extend('admin/layout/admin_layout'); ?>
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="main-wrapper">
     <div class="page-wrapper pagehead">
@@ -12,7 +12,8 @@
                     <h6>Tabel list pengguna aplikasi</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="<?= base_url('users-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Tambah</a>
+                    <a href="<?= base_url('users-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg"
+                            alt="img" class="me-1">Tambah</a>
                 </div>
             </div>
             <div class="row">
@@ -28,19 +29,23 @@
                                         </a>
                                     </div>
                                     <div class="search-input">
-                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img"></a>
+                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                                alt="img"></a>
                                     </div>
                                 </div>
                                 <div class="wordset">
                                     <ul>
                                         <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                                    src="assets/img/icons/pdf.svg" alt="img"></a>
                                         </li>
                                         <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg" alt="img"></a>
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                                    src="assets/img/icons/excel.svg" alt="img"></a>
                                         </li>
                                         <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="assets/img/icons/printer.svg" alt="img"></a>
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                                    src="assets/img/icons/printer.svg" alt="img"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -87,4 +92,4 @@
     </div>
 </div>
 <!-- Mengakhiri inisialisasi content pada halaman ini -->
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

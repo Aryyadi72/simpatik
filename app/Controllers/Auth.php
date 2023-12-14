@@ -6,13 +6,15 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
+    // Menampilkan halaman login
     public function index()
     {
         $title['title'] = "Login - SIMPATIK";
-        return view ('login_page', ['title' => $title]);
+        return view('login_page', ['title' => $title]);
     }
 
-    public function processLogin() 
+    // Menangani proses login
+    public function processLogin()
     {
         $usersModel = new \App\Models\Users();
 
@@ -20,12 +22,12 @@ class Auth extends BaseController
         $password = $this->request->getPost('password');
 
         $user = $usersModel->where('username', $username)->first();
-        
+
         if ($user && password_verify($password, $user['password'])) {
             session()->set('username', $user['username']);
             session()->set('nama', $user['nama']);
             session()->set('id', $user['id']);
-    
+
             if ($user['level'] == 'admin') {
                 return redirect()->to(base_url('/dash-admin'));
             } else {
@@ -37,10 +39,11 @@ class Auth extends BaseController
         }
     }
 
+    // Menangani proses logout
     public function logout()
     {
         $session = \Config\Services::session();
-        
+
         $session->destroy();
 
         return redirect()->to('/login')->with('success', 'Logout berhasil.');

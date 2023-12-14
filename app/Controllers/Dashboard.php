@@ -6,25 +6,29 @@ use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
 {
+    protected $filters = ['auth'];
     // Function untuk menampilkan halaman dashboard admin
-    public function index()
-    {
-        if (session()->get('id') == '') {
-            session()->setFlashdata('gagal', 'Anda belum login');
-            return redirect()->to(base_url('/login'));
-        }
+    protected $session;
 
-        $title['title'] = "Dashboard - Admin";
-        return view('admin/admin_dash', ['title' => $title]);
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+
+        if (!$this->session->has('user_id')) {
+            return redirect()->to('/login');
+        }
     }
 
+    public function index()
+    {
+        $userId = $this->session->get('id');
+        $title['title'] = "Dashboard - Admin";
+        return view('admin/admin_dash', ['title' => $title, 'userId' => $userId]);
+    }
+
+    // Function untuk menampilkan halaman dashboard guru
     public function dashboardGuru()
     {
-        if (session()->get('id') == '') {
-            session()->setFlashdata('gagal', 'Anda belum login');
-            return redirect()->to(base_url('/login'));
-        }
-
         $title['title'] = "Dashboard - Guru";
         return view('guru/guru_dash', ['title' => $title]);
     }

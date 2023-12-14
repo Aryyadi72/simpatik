@@ -10,16 +10,20 @@ class Permintaan extends BaseController
     // Function untuk menampilkan halaman permintaan masuk
     public function index()
     {
+        $permintaanModel = new \App\Models\PermintaanBarang();
+        $data['permintaan'] = $permintaanModel->orderBy('id', 'ASC')->findAll();
         $title['title'] = "Permintaan Masuk - Admin";
-        return view('admin/permintaan/index', ['title' => $title]);
+        return view('admin/permintaan/index', ['title' => $title, 'data' => $data]);
     }
 
+    // Function untuk menampilkan halaman tambah permintaan untuk guru
     public function permintaanGuru()
     {
         $title['title'] = "Tambah Permintaan - Guru";
         return view('guru/permintaan/index', ['title' => $title]);
     }
 
+    // Function untuk menampilkan halaman list barang yang akan dipilih guru
     public function listBarang()
     {
         $barangModel = new \App\Models\Barang();
@@ -28,6 +32,7 @@ class Permintaan extends BaseController
         return view('guru/permintaan/barang', ['title' => $title, 'data' => $data]);
     }
 
+    // Function untuk membuat kode random kode permintaan
     private function generateKodePermintaan()
     {
         $permintaanModel = new \App\Models\PermintaanBarang;
@@ -38,6 +43,7 @@ class Permintaan extends BaseController
         return $kodePermintaan;
     }
 
+    // Function untuk menambahkan data permintaan yang dikirimkan dari view ke database
     public function store()
     {
         $permintaanModel = new \App\Models\PermintaanBarang;
@@ -52,13 +58,13 @@ class Permintaan extends BaseController
             // Iterate through selected items
             foreach ($barangTerpilih as $index => $kodeBarang) {
                 $data = [
-                    'kode_barang'           => $kodeBarang,
-                    'jumlah'                => $jumlahBarang[$index],
-                    'kode_permintaan'       => $kodePermintaan,
-                    'tanggal_permintaan'    => Carbon::now(),
-                    'pemohon'               => 'guru',
-                    'status'                => 'Diajukan',
-                    'keterangan'            => 'Menunggu Persetujuan Admin',
+                    'kode_barang' => $kodeBarang,
+                    'jumlah' => $jumlahBarang[$index],
+                    'kode_permintaan' => $kodePermintaan,
+                    'tanggal_permintaan' => Carbon::now(),
+                    'pemohon' => 'guru',
+                    'status' => 'Diajukan',
+                    'keterangan' => 'Menunggu Persetujuan Admin',
                 ];
 
                 $permintaanModel->insert($data);

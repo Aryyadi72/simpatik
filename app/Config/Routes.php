@@ -12,10 +12,10 @@ $routes->post('/auth-processLogin', 'Auth::processLogin');
 $routes->get('/logout', 'Auth::logout');
 
 // Routing menuju dashboard admin
-$routes->get('/dash-admin', 'Dashboard::index');
+$routes->get('/dash-admin', 'Dashboard::index', ['filter' => 'auth']);
 
 // Routing menuju dashboard guru
-$routes->get('/dash-guru', 'Dashboard::dashboardGuru');
+$routes->get('/dash-guru', 'Dashboard::dashboardGuru', ['filter' => 'auth']);
 
 // Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');

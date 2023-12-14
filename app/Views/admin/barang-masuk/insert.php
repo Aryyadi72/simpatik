@@ -27,18 +27,13 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="col-lg-12 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Tanggal Masuk</label>
                                 <input type="date" name="tanggal_masuk" id="tanggal_masuk">
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Inputer</label>
-                                <input type="text" name="inputer" id="inputer">
-                            </div>
-                        </div>
+                        <input type="hidden" name="inputer" id="inputer" value="<?= $userId ?>">
                     </div>
                     <div class="row data-data">
                         <div class="col-lg-6 col-sm-6 col-12">

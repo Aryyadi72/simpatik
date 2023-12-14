@@ -53,12 +53,52 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            $no = 1;
+                                            $groupedData = [];
+
+                                            // Group data by 'kode_permintaan'
+                                            foreach ($data['permintaan'] as $pm) {
+                                                $kodePermintaan = $pm['kode_permintaan'];
+                                                if (!isset($groupedData[$kodePermintaan])) {
+                                                    $groupedData[$kodePermintaan] = $pm;
+                                                }
+                                            }
+
+                                            // Display the grouped data
+                                            foreach ($groupedData as $pm) :
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2011/04/25</td>
-                                            <td>Tiger Nixon</td>
-                                            <td><span class="badges bg-lightgreen">Diproses</span></td>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $pm['tanggal_permintaan'] ?></td>
+                                            <td><?= $pm['pemohon'] ?></td>
+                                            <td>
+                                                <?php
+                                                $status = $pm['status'];
+
+                                                switch ($status) {
+                                                    case 'Diajukan':
+                                                        $badgeClass = 'bg-info';
+                                                        break;
+                                                    case 'Diproses':
+                                                        $badgeClass = 'bg-warning';
+                                                        break;
+                                                    case 'Disetujui':
+                                                        $badgeClass = 'bg-success';
+                                                        break;
+                                                    case 'Dibatalkan':
+                                                        $badgeClass = 'bg-danger';
+                                                        break;
+                                                    default:
+                                                        $badgeClass = 'bg-dark';
+                                                        break;
+                                                }
+                                                ?>
+
+                                                <span class="badges <?= $badgeClass ?>"><?= $status ?></span>
+                                            </td>
                                         </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

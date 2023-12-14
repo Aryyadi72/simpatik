@@ -38,6 +38,7 @@ class Barang extends Model
     protected $beforeDelete = [];
     protected $afterDelete = [];
 
+    // Function untuk mengecek kode barang terakhir yang ada di dalam database
     public function getLatestKodeBarang()
     {
         $latestKodeBarang = $this->db->table('barang')->select('kode_barang')->orderBy('created_at', 'desc')->limit(1)->get()->getRow();

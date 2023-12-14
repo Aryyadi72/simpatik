@@ -7,23 +7,37 @@ use App\Controllers\BaseController;
 class BarangMasuk extends BaseController
 {
     // Function untuk menampilkan halaman riwayat barang masuk
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+
+        if (!$this->session->has('id')) {
+            return redirect()->to('/login');
+        }
+    }
+
     public function index()
     {
         $barangMasukModel = new \App\Models\BarangMasuk();
         $data['barang'] = $barangMasukModel->getAllBarang();
 
         $title['title'] = "Riwayat Barang Masuk - Admin";
-        return view ('admin/barang-masuk/index', ['title' => $title, 'data' => $data]);
+        return view('admin/barang-masuk/index', ['title' => $title, 'data' => $data]);
     }
 
+    // Function menampilkan halaman tambah barang masuk
     public function add()
     {
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
+        $userId = $this->session->get('id');
         $title['title'] = "Tambah Barang Masuk - Admin";
-        return view ('admin/barang-masuk/insert', ['title' => $title, 'data' => $data]);
+        return view('admin/barang-masuk/insert', ['title' => $title, 'data' => $data, 'userId' => $userId]);
     }
 
+    // Function untuk menangani proses tambah barang masuk kedalam database
     public function store()
     {
         $barangMasukModel = new \App\Models\BarangMasuk();
@@ -35,10 +49,10 @@ class BarangMasuk extends BaseController
         $inputer = $this->request->getPost('inputer');
 
         $barangMasukModel->insert([
-            'kode_barang'   => $kodeBarang,
-            'jumlah'        => $jumlahMasuk,
+            'kode_barang' => $kodeBarang,
+            'jumlah' => $jumlahMasuk,
             'tanggal_masuk' => $tanggalMasuk,
-            'inputer'       => $inputer,
+            'inputer' => $inputer,
         ]);
 
         $barang = $barangModel->where('kode_barang', $kodeBarang)->first();

@@ -61,7 +61,7 @@
                                             <td><?= $barang['tanggal_masuk'] ?></td>
                                             <td><?= $barang['nama_barang'] ?></td>
                                             <td><?= $barang['jumlah'] ?></td>
-                                            <td><?= $barang['inputer'] ?></td>
+                                            <td><?= $barang['nama'] ?></td>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>
