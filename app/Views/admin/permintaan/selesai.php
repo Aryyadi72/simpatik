@@ -14,8 +14,9 @@
         <div class="card">
             <div class="card-body">
                 <!-- Digunakan pada form yang memerlukan upload file/gambar -->
-                <form method="post" action="<?= base_url('permintaan-masuk-detail-diproses-edit/'.$data['permintaan']['id']) ?>">
+                <form method="post" action="<?= base_url('permintaan-masuk-detail-selesai-edit/'.$data['permintaan']['id']) ?>">
                     <input type="hidden" name="id" id="id" value="<?= $data['permintaan']['id'] ?>">
+                    <input type="hidden" name="kode_barang" id="kode_barang" value="<?= $data['permintaan']['kode_barang'] ?>">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">

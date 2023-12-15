@@ -148,7 +148,7 @@ class Permintaan extends BaseController
 
         $title['title'] = "Proses Permintaan - Admin";
 
-        return view('admin/permintaan/detail', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
+        return view('admin/permintaan/selesai', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     public function editProses($id)
@@ -186,95 +186,89 @@ class Permintaan extends BaseController
         return view('admin/permintaan/proses', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
-    public function editSelesai($id)
+    // public function editSelesai($id)
+    // {
+    //     $userId = $this->session->get('id');
+    //     $nama = $this->session->get('nama');
+    //     $level = $this->session->get('level');
+    //     $title['title'] = "Proses Permintaan - Admin";
+
+    //     $permintaanModel = new \App\Models\PermintaanBarang();
+
+    //     // Mendapatkan data permintaan barang yang akan di-edit
+    //     $data['permintaan'] = $permintaanModel->find($id);
+
+    //     if ($this->request->getMethod() === 'post') {
+    //         // Mengambil data yang di-submit dari form edit
+    //         $newStatus = $this->request->getVar('status');
+    //         $newKeterangan = $this->request->getVar('keterangan');
+
+    //         // Update data status dan keterangan
+    //         $updatedData = [
+    //             'status' => $newStatus,
+    //             'keterangan' => $newKeterangan
+    //         ];
+
+    //         // Melakukan validasi jika data berhasil di-update
+    //         if ($permintaanModel->update($id, $updatedData)) {
+    //             return redirect()->to(site_url('/permintaan-masuk'))->with('success', 'Data berhasil di-update');
+    //         } else {
+    //             return redirect()->back()->withInput()->with('error', 'Gagal mengupdate data');
+    //         }
+    //     }
+
+    //     // Tampilkan form untuk mengedit status dan keterangan
+    //     return view('admin/permintaan/selesai', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
+    // }
+
+    public function updateStatusAndKeterangan($id)
     {
-        $userId = $this->session->get('id');
-        $nama = $this->session->get('nama');
-        $level = $this->session->get('level');
-        $title['title'] = "Proses Permintaan - Admin";
+        // Ambil data yang di-submit dari form update
+        $newStatus = $this->request->getVar('status');
+        $kodeBarang = $this->request->getVar('kode_barang');
+        $newKeterangan = $this->request->getVar('keterangan');
 
-        $permintaanModel = new \App\Models\PermintaanBarang();
-
-        // Mendapatkan data permintaan barang yang akan di-edit
-        $data['permintaan'] = $permintaanModel->find($id);
-
-        if ($this->request->getMethod() === 'post') {
-            // Mengambil data yang di-submit dari form edit
-            $newStatus = $this->request->getVar('status');
-            $newKeterangan = $this->request->getVar('keterangan');
-
-            // Update data status dan keterangan
+        // Jika status sudah diupdate menjadi 'disetujui'
+        if ($newStatus === 'disetujui') {
+            // Lakukan pembaruan status dan keterangan pada tabel permintaan_barang berdasarkan $id
+            $permintaanModel = new \App\Models\PermintaanBarang();
             $updatedData = [
                 'status' => $newStatus,
                 'keterangan' => $newKeterangan
             ];
+            $permintaanModel->update($id, $updatedData);
+            // Ambil data permintaan barang yang telah di-update
+            $updatedPermintaan = $permintaanModel->find($id);
 
-            // Melakukan validasi jika data berhasil di-update
-            if ($permintaanModel->update($id, $updatedData)) {
-                return redirect()->to(site_url('/permintaan-masuk'))->with('success', 'Data berhasil di-update');
-            } else {
-                return redirect()->back()->withInput()->with('error', 'Gagal mengupdate data');
-            }
+            // Masukkan data ke tabel barang_keluar
+            $barangKeluarModel = new \App\Models\BarangKeluar();
+            $dataBarangKeluar = [
+                'kode_barang' => $updatedPermintaan['kode_barang'],
+                'jumlah' => $updatedPermintaan['jumlah'],
+                'tanggal_keluar' => date('Y-m-d H:i:s'), // Tanggal saat ini
+                'inputer' => $this->session->get('id'),
+                'pemohon' => $updatedPermintaan['pemohon']
+            ];
+            $barangKeluarModel->insert($dataBarangKeluar);
+
+            // Kurangi stok barang di tabel barang berdasarkan jumlah yang diminta
+            $barangModel = new \App\Models\Barang();
+            $kodeBarang = $this->request->getVar('kode_barang');
+            $dataBarang = $barangModel->where('kode_barang', $kodeBarang)->get()->getRowArray();
+            $stokBaru = $dataBarang['stok_barang'] - $updatedPermintaan['jumlah'];
+            $updatedStokBarang = [
+                'stok_barang' => $stokBaru
+            ];
+            // Hasil dari dd diatas adalah benar yaitu
+            // $updatedStokBarang array (1)
+            // ⇄stok_barang => integer 21
+            $barangModel->update($kodeBarang, $updatedStokBarang);
+            dd($stokBaru);
         }
 
-        // Tampilkan form untuk mengedit status dan keterangan
-        return view('admin/permintaan/selesai', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
+        // Redirect pengguna ke halaman yang sesuai setelah proses selesai
+        return redirect()->to(base_url('permintaan-masuk'));
     }
-
-    public function editSelesaiA($id)
-    {
-        $userId = $this->session->get('id');
-        $nama = $this->session->get('nama');
-        $level = $this->session->get('level');
-        $title['title'] = "Proses Permintaan - Admin";
-
-        $permintaanModel = new \App\Models\PermintaanBarang();
-
-        // Mendapatkan data permintaan barang yang akan di-edit
-        $data['permintaan'] = $permintaanModel->find($id);
-
-        if ($this->request->getMethod() === 'post') {
-            // ... (kode yang sudah ada sebelumnya)
-            $newStatus = $this->request->getVar('status');
-            $newKeterangan = $this->request->getVar('keterangan');
-
-            // Logika tambahan setelah proses update status dan keterangan
-            if ($newStatus === 'disetujui') {
-                $barangModel = new \App\Models\Barang();
-                $barangKeluarModel = new \App\Models\BarangKeluar();
-
-                // Mendapatkan jumlah barang yang diminta
-                $jumlahDiminta = $data['permintaan']['jumlah'];
-
-                // Mendapatkan data barang dari tabel barang
-                $dataBarang = $barangModel->find($data['permintaan']['kode_barang']);
-
-                // Mengurangi stok barang
-                $stokBaru = $dataBarang['stok'] - $jumlahDiminta;
-
-                // Update stok barang di tabel barang
-                $updatedStokBarang = [
-                    'stok' => $stokBaru
-                ];
-
-                // Lakukan update stok barang
-                $barangModel->update($data['permintaan']['kode_barang'], $updatedStokBarang);
-
-                // Insert data ke tabel barang_keluar
-                $dataBarangKeluar = [
-                    'kode_barang' => $data['permintaan']['kode_barang'],
-                    'jumlah_keluar' => $jumlahDiminta,
-                    'tanggal_keluar' => date('Y-m-d H:i:s') // Tanggal saat ini
-                    // Jika ada kolom lain, sesuaikan di sini
-                ];
-
-                $barangKeluarModel->insert($dataBarangKeluar);
-            }
-
-            return view('admin/permintaan/selesai', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
-        }
-    }
-
 
     public function editBatal($id)
     {

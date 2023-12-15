@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class BarangKeluar extends Model
 {
-    protected $table            = 'barangkeluars';
+    protected $table            = 'barang_keluar';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['kode_barang', 'jumlah', 'tanggal_keluar', 'inputer', 'pemohon'];
 
     // Dates
     protected $useTimestamps = false;

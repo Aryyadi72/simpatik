@@ -22,8 +22,8 @@ $routes->get('/permintaan-masuk', 'Permintaan::index');
 $routes->get('/permintaan-masuk-detail-diproses/(:any)', 'Permintaan::editProses/$1');
 $routes->post('/permintaan-masuk-detail-diproses-edit/(:any)', 'Permintaan::editProses/$1');
 
-$routes->get('/permintaan-masuk-detail-selesai/(:any)', 'Permintaan::editSelesai/$1');
-$routes->post('/permintaan-masuk-detail-selesai-edit/(:any)', 'Permintaan::editSelesai/$1');
+$routes->get('/permintaan-masuk-detail-selesai/(:any)', 'Permintaan::updateForm/$1');
+$routes->post('/permintaan-masuk-detail-selesai-edit/(:any)', 'Permintaan::updateStatusAndKeterangan/$1');
 
 $routes->get('/permintaan-masuk-detail-batal/(:any)', 'Permintaan::editBatal/$1');
 $routes->post('/permintaan-masuk-detail-batal-edit/(:any)', 'Permintaan::editBatal/$1');
