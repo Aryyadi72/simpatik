@@ -115,33 +115,57 @@
                                 <th>Jumlah </th>
                                 <th>Foto</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                                $no = 1;
+                                foreach($data['permintaan'] as $permintaan):
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>Computers</td>
-                                <td>2</td>
-                                <td class="productimgname">
-                                    <a href="javascript:void(0);" class="product-img">
-                                        <img src="assets/img/product/product1.jpg" alt="product">
-                                    </a>
-                                    <a href="javascript:void(0);">Macbook pro</a>
-                                </td>
-                                <td>Diterima</td>
+                                <td><?= $no++ ?></td>
+                                <td><?= $permintaan['nama_barang'] ?></td>
+                                <td><?= $permintaan['jumlah'] ?></td>
                                 <td>
-                                    <a class="me-3" href="product-details.html">
-                                        <img src="assets/img/icons/eye.svg" alt="img">
-                                    </a>
-                                    <a class="me-3" href="editproduct.html">
-                                        <img src="assets/img/icons/edit.svg" alt="img">
-                                    </a>
-                                    <a class="confirm-text" href="javascript:void(0);">
-                                        <img src="assets/img/icons/delete.svg" alt="img">
-                                    </a>
+                                    <!-- Menampilkan gambar yang sudah di upload kedalam database -->
+                                    <?php if (!empty($permintaan['foto_barang'])): ?>
+                                        <img src="<?= base_url($permintaan['foto_barang']) ?>" alt="Foto Barang" width="50">
+                                    <?php else: ?>
+                                        <span>No Image</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        $status = $permintaan['status'];
+
+                                        switch ($status) {
+                                            case 'diajukan':
+                                                $badgeClass = 'bg-info';
+                                                break;
+                                            case 'diproses':
+                                                $badgeClass = 'bg-warning';
+                                                break;
+                                            case 'disetujui':
+                                                $badgeClass = 'bg-success';
+                                                break;
+                                            case 'dibatalkan':
+                                                $badgeClass = 'bg-danger';
+                                                break;
+                                            default:
+                                                $badgeClass = 'bg-dark';
+                                                break;
+                                        }
+                                    ?>
+                                    <span class="badges <?= $badgeClass ?>">
+                                        <?= $status ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <?= $permintaan['keterangan'] ?>
                                 </td>
                             </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

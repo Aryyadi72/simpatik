@@ -19,8 +19,14 @@ $routes->get('/dash-guru', 'Dashboard::dashboardGuru', ['filter' => 'auth']);
 
 // Routing menuju halaman permintaan masuk
 $routes->get('/permintaan-masuk', 'Permintaan::index');
-$routes->get('/permintaan-masuk-detail/(:any)', 'Permintaan::detail/$1');
-$routes->get('update-status-permintaan/(:num)/(:alpha)', 'Permintaan::updateStatusPermintaan/$1/$2');
+$routes->get('/permintaan-masuk-detail-diproses/(:any)', 'Permintaan::editProses/$1');
+$routes->post('/permintaan-masuk-detail-diproses-edit/(:any)', 'Permintaan::editProses/$1');
+
+$routes->get('/permintaan-masuk-detail-selesai/(:any)', 'Permintaan::editSelesai/$1');
+$routes->post('/permintaan-masuk-detail-selesai-edit/(:any)', 'Permintaan::editSelesai/$1');
+
+$routes->get('/permintaan-masuk-detail-batal/(:any)', 'Permintaan::editBatal/$1');
+$routes->post('/permintaan-masuk-detail-batal-edit/(:any)', 'Permintaan::editBatal/$1');
 
 $routes->get('/barang', 'Barang::index', ['as' => 'barang']);
 $routes->get('/barang-add', 'Barang::add');

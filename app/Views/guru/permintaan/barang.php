@@ -13,6 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" action="<?= site_url('/permintaan-store') ?>">
+                <input type="hidden" name="pemohon" value="<?= $userId ?>">
                     <div class="row">
                         <div class="col-lg-12">
                             <a href="transferlist.html" class="btn btn-cancel">Cancel</a>

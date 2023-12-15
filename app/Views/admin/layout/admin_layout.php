@@ -8,7 +8,7 @@
             <meta name="author" content="Dreamguys - Bootstrap Admin Template">
             <meta name="robots" content="noindex, nofollow">
             <title><?= $title['title'] ?></title>
-            <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/favicon.png') ?>">
+            <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/favicon1.png') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/animate.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-datetimepicker.min.css') ?>">

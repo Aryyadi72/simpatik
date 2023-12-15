@@ -51,9 +51,4 @@ class PermintaanBarang extends Model
         return $this->where('kode_permintaan', $kode_permintaan)->findAll();
     }
 
-    public function barang()
-    {
-        return $this->belongsTo('App\Models\Barang', 'kode_barang', 'kode_barang');
-    }
-
 }

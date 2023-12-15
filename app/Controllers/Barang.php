@@ -10,20 +10,37 @@ class Barang extends BaseController
     // Helper bawaan ci4 untuk membuat form
     protected $helpers = ['form'];
 
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+
+        if (!$this->session->has('user_id')) {
+            return redirect()->to('/login');
+        }
+    }
+
     // Function untuk menampilkan data barang dari database di halaman barang
     public function index()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
         $title['title'] = "Barang - Admin";
-        return view('admin/barang/index', ['title' => $title, 'data' => $data]);
+        return view('admin/barang/index', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menampilkan halaman tambah barang
     public function add()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $title['title'] = "Tambah Barang - Admin";
-        return view('admin/barang/insert', ['title' => $title]);
+        return view('admin/barang/insert', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk membuat kode barang secara random
@@ -96,11 +113,14 @@ class Barang extends BaseController
     // Function untuk menampilkan halaman update barang
     public function updateForm($id)
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->find($id);
         $title['title'] = "Ubah Barang - Admin";
 
-        return view('admin/barang/update', ['title' => $title, 'data' => $data]);
+        return view('admin/barang/update', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk memproses update data barang

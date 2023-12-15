@@ -20,21 +20,27 @@ class BarangMasuk extends BaseController
 
     public function index()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
+
         $barangMasukModel = new \App\Models\BarangMasuk();
         $data['barang'] = $barangMasukModel->getAllBarang();
 
         $title['title'] = "Riwayat Barang Masuk - Admin";
-        return view('admin/barang-masuk/index', ['title' => $title, 'data' => $data]);
+        return view('admin/barang-masuk/index', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function menampilkan halaman tambah barang masuk
     public function add()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
-        $userId = $this->session->get('id');
         $title['title'] = "Tambah Barang Masuk - Admin";
-        return view('admin/barang-masuk/insert', ['title' => $title, 'data' => $data, 'userId' => $userId]);
+        return view('admin/barang-masuk/insert', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menangani proses tambah barang masuk kedalam database

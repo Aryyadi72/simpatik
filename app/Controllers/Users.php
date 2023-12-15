@@ -6,22 +6,39 @@ use App\Controllers\BaseController;
 
 class Users extends BaseController
 {
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+
+        if (!$this->session->has('user_id')) {
+            return redirect()->to('/login');
+        }
+    }
+
     // Function untuk menampilkan halaman users
     public function index()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $usersModel = new \App\Models\Users();
         $data['users'] = $usersModel->orderBy('id', 'ASC')->findAll();
         // Judul untuk halaman
         $title['title'] = "Users - Admin";
         // mengarahkan tampilan ke halaman users yang berada di dalam folder users dan folder index
-        return view ('admin/users/index', ['title' => $title, 'data' => $data]);
+        return view ('admin/users/index', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menampilkan halaman tambah data users
     public function add()
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $title['title'] = "Tambah Users - Admin";
-        return view('admin/users/insert', ['title' => $title]);
+        return view('admin/users/insert', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menambahkan data users kedalam database
@@ -79,11 +96,14 @@ class Users extends BaseController
 
     public function updateForm($id)
     {
+        $userId = $this->session->get('id');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $userModel = new \App\Models\Users();
         $data['users'] = $userModel->find($id);
         $title['title'] = "Ubah User - Admin";
 
-        return view('admin/users/update', ['title' => $title, 'data' => $data]);
+        return view('admin/users/update', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     public function update()

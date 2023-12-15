@@ -53,25 +53,18 @@
                                             <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Nama</th>
+                                            <th>Barang</th>
                                             <th>Status</th>
+                                            <th>Keterangan</th>
                                             <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $groupedData = [];
-
-                                        // Group data by 'kode_permintaan'
-                                        foreach ($data['permintaan'] as $pm) {
-                                            $kodePermintaan = $pm['kode_permintaan'];
-                                            if (!isset($groupedData[$kodePermintaan])) {
-                                                $groupedData[$kodePermintaan] = $pm;
-                                            }
-                                        }
 
                                         // Display the grouped data
-                                        foreach ($groupedData as $pm):
+                                        foreach ($data['permintaan'] as $pm):
                                             ?>
                                             <tr>
                                                 <td>
@@ -81,7 +74,10 @@
                                                     <?= $pm['tanggal_permintaan'] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $pm['pemohon'] ?>
+                                                    <?= $pm['nama'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $pm['nama_barang'] ?>
                                                 </td>
                                                 <td>
                                                     <?php
@@ -110,9 +106,31 @@
                                                         <?= $status ?>
                                                     </span>
                                                 </td>
-                                                <td class="d-flex justify-content-center align-items-center">
-                                                    <a href="<?= base_url() ?>permintaan-masuk-detail/<?= $pm['kode_permintaan'] ?>"
-                                                        class="btn btn-info"><i class="fa fa-th"></i></a>
+                                                <td>
+                                                    <?= $pm['keterangan'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($status === 'diajukan'): ?>
+                                                        <a class="btn btn-warning"
+                                                            href="<?= base_url('permintaan-masuk-detail-diproses/' . $pm['pbid']) ?>">
+                                                            <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger"
+                                                            href="<?= base_url('permintaan-masuk-detail-batal/' . $pm['pbid']) ?>">
+                                                            <i class="fa fa-ban"></i>
+                                                        </a>
+                                                    <?php elseif ($status === 'diproses'): ?>
+                                                        <a class="btn btn-success"
+                                                            href="<?= base_url('permintaan-masuk-detail-selesai/' . $pm['pbid']) ?>">
+                                                            <i class="fa fa-check"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger"
+                                                            href="<?= base_url('permintaan-masuk-detail-batal/' . $pm['pbid']) ?>">
+                                                            <i class="fa fa-ban"></i>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <button class="btn btn-secondary btn-sm">Permintaan Selesai</button>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>
