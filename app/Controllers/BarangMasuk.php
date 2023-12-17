@@ -52,13 +52,11 @@ class BarangMasuk extends BaseController
         $kodeBarang = $this->request->getPost('kode_barang');
         $jumlahMasuk = $this->request->getPost('jumlah');
         $tanggalMasuk = $this->request->getVar('tanggal_masuk');
-        $inputer = $this->request->getPost('inputer');
 
         $barangMasukModel->insert([
             'kode_barang' => $kodeBarang,
             'jumlah' => $jumlahMasuk,
             'tanggal_masuk' => $tanggalMasuk,
-            'inputer' => $inputer,
         ]);
 
         $barang = $barangModel->where('kode_barang', $kodeBarang)->first();
@@ -69,6 +67,40 @@ class BarangMasuk extends BaseController
         $barangModel->update($barang['id'], ['stok_barang' => $stokBaru]);
 
         // Mengarahkan tampilan ke halaman users dengan menggunakan routing users
-        return redirect()->to(site_url('/barang'));
+        return redirect()->to(site_url('/barang'))->with('success', 'Data berhasil ditambahkan');
+    }
+
+    public function exportExcel()
+    {
+        $barangMasukModel = new \App\Models\BarangMasuk();
+        $data['barang'] = $barangMasukModel->getAllBarang();
+
+        // Inisialisasi objek Spreadsheet dari PhpSpreadsheet
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Tanggal')
+            ->setCellValue('B1', 'Barang')
+            ->setCellValue('C1', 'Jumlah');
+
+        $column = 2;
+        // tulis data mobil ke cell
+        foreach ($data['barang'] as $data) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $data['tanggal_masuk'])
+                ->setCellValue('B' . $column, $data['nama_barang'])
+                ->setCellValue('C' . $column, $data['jumlah']);
+            $column++;
+        }
+
+        // tulis dalam format .xlsx
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $filename = 'export_barang_masuk_' . date('YmdHis') . '.xlsx';
+
+        // Redirect hasil generate xlsx ke web client
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 }

@@ -3,6 +3,20 @@
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content'); ?>
 
+<!-- Alert untuk menampilkan pesan suksess atau error -->
+<?php
+$success = session()->getFlashdata('success');
+$error = session()->getFlashdata('error');
+
+if (!empty($success)) {
+    echo "<script>alert('" . $success . "');</script>";
+}
+
+if (!empty($error)) {
+    echo "<script>alert('" . $error . "');</script>";
+}
+?>
+
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">

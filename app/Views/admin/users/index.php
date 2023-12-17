@@ -3,12 +3,26 @@
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content'); ?>
 
+<!-- Alert untuk menampilkan pesan suksess atau error -->
+<?php
+$success = session()->getFlashdata('success');
+$error = session()->getFlashdata('error');
+
+if (!empty($success)) {
+    echo "<script>alert('" . $success . "');</script>";
+}
+
+if (!empty($error)) {
+    echo "<script>alert('" . $error . "');</script>";
+}
+?>
+
 <div class="main-wrapper">
     <div class="page-wrapper pagehead">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>List Users</h4>
+                    <h4>List Pengguna</h4>
                     <h6>Tabel list pengguna aplikasi</h6>
                 </div>
                 <div class="page-btn">
@@ -22,32 +36,10 @@
                         <div class="card-body">
                             <div class="table-top">
                                 <div class="search-set">
-                                    <div class="search-path">
-                                        <a class="btn btn-filter" id="filter_search">
-                                            <img src="assets/img/icons/filter.svg" alt="img">
-                                            <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                                        </a>
-                                    </div>
                                     <div class="search-input">
                                         <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
                                                 alt="img"></a>
                                     </div>
-                                </div>
-                                <div class="wordset">
-                                    <ul>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                                    src="assets/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                                    src="assets/img/icons/excel.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                                    src="assets/img/icons/printer.svg" alt="img"></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -64,22 +56,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                        $no=1;
-                                        foreach($data['users'] as $users):
-                                        ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $users['nik'] ?></td>
-                                            <td><?= $users['nama'] ?></td>
-                                            <td><?= $users['no_hp'] ?></td>
-                                            <td><?= $users['email'] ?></td>
-                                            <td><?= $users['username'] ?></td>
-                                            <td>
-                                                <a href="<?= base_url('users-ubah/' . $users['id']) ?>" class="btn btn-warning"><i class="fa fa-edit" data-bs-toggle="tooltip" title="Ubah Data"></i></a>
-                                                <a href="<?= route_to('delete_users' , $users['id']) ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash" data-bs-toggle="tooltip" title="Hapus"></i></a>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($data['users'] as $users):
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $no++ ?>
+                                                </td>
+                                                <td>
+                                                    <?= $users['nik'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $users['nama'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $users['no_hp'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $users['email'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $users['username'] ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('users-ubah/' . $users['id']) ?>"
+                                                        class="btn btn-warning"><i class="fa fa-edit"
+                                                            data-bs-toggle="tooltip" title="Ubah Data"></i></a>
+                                                    <a href="<?= route_to('delete_users', $users['id']) ?>"
+                                                        class="btn btn-danger"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
+                                                            class="fa fa-trash" data-bs-toggle="tooltip"
+                                                            title="Hapus"></i></a>
+                                                </td>
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>

@@ -22,8 +22,8 @@ class Permintaan extends BaseController
     public function index()
     {
         $userId = $this->session->get('id');
-        $nama   = $this->session->get('nama');
-        $level  = $this->session->get('level');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
 
         $permintaanModel = new \App\Models\PermintaanBarang();
         $data['permintaan'] = $permintaanModel
@@ -40,7 +40,7 @@ class Permintaan extends BaseController
     // Function untuk menampilkan halaman tambah permintaan untuk guru
     public function permintaanGuru()
     {
-        $userId = $this->session->get('id'); 
+        $userId = $this->session->get('id');
         if (!$userId) {
             return redirect()->to(base_url('login'));
         }
@@ -54,8 +54,8 @@ class Permintaan extends BaseController
             ->findAll();
 
         $userId = $this->session->get('id');
-        $nama   = $this->session->get('nama');
-        $level  = $this->session->get('level');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
 
         $title['title'] = "Tambah Permintaan - Guru";
         return view('guru/permintaan/index', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level, 'data' => $data]);
@@ -65,8 +65,8 @@ class Permintaan extends BaseController
     public function listBarang()
     {
         $userId = $this->session->get('id');
-        $nama   = $this->session->get('nama');
-        $level  = $this->session->get('level');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
         $barangModel = new \App\Models\Barang();
         $data['barang'] = $barangModel->orderBy('id', 'ASC')->findAll();
         $title['title'] = "List Barang - Guru";
@@ -76,10 +76,10 @@ class Permintaan extends BaseController
     // Function untuk membuat kode random kode permintaan
     private function generateKodePermintaan()
     {
-        $permintaanModel        = new \App\Models\PermintaanBarang;
-        $latestKodePermintaan   = $permintaanModel->getLatestKodePermintaan();
-        $kodePermintaanNumber   = intval(substr($latestKodePermintaan, 2)) + 1;
-        $kodePermintaan         = 'KP' . str_pad($kodePermintaanNumber, 2, '0', STR_PAD_LEFT);
+        $permintaanModel = new \App\Models\PermintaanBarang;
+        $latestKodePermintaan = $permintaanModel->getLatestKodePermintaan();
+        $kodePermintaanNumber = intval(substr($latestKodePermintaan, 2)) + 1;
+        $kodePermintaan = 'KP' . str_pad($kodePermintaanNumber, 2, '0', STR_PAD_LEFT);
 
         return $kodePermintaan;
     }
@@ -91,28 +91,28 @@ class Permintaan extends BaseController
 
         $kodePermintaan = $this->generateKodePermintaan();
 
-        $jumlahBarang       = $this->request->getVar('jumlah');
-        $pemohonBarang      = $this->request->getVar('pemohon');
-        $barangTerpilih     = $this->request->getVar('barang_terpilih');
+        $jumlahBarang = $this->request->getVar('jumlah');
+        $pemohonBarang = $this->request->getVar('pemohon');
+        $barangTerpilih = $this->request->getVar('barang_terpilih');
 
         // Validasi jumlah barang dan barang terpilih
         if (!empty($jumlahBarang) && !empty($barangTerpilih)) {
             // Iterate through selected items
             foreach ($barangTerpilih as $index => $kodeBarang) {
                 $data = [
-                    'kode_barang'           => $kodeBarang,
-                    'jumlah'                => $jumlahBarang[$index],
-                    'kode_permintaan'       => $kodePermintaan,
-                    'tanggal_permintaan'    => Carbon::now(),
-                    'pemohon'               => $pemohonBarang,
-                    'status'                => 'diajukan',
-                    'keterangan'            => 'Menunggu Persetujuan Admin',
+                    'kode_barang' => $kodeBarang,
+                    'jumlah' => $jumlahBarang[$index],
+                    'kode_permintaan' => $kodePermintaan,
+                    'tanggal_permintaan' => Carbon::now(),
+                    'pemohon' => $pemohonBarang,
+                    'status' => 'diajukan',
+                    'keterangan' => 'Menunggu Persetujuan Admin',
                 ];
 
                 $permintaanModel->insert($data);
             }
 
-            return redirect()->to(site_url('/permintaan-guru'));
+            return redirect()->to(site_url('/permintaan-guru'))->with('success', 'Pengajuan berhasil.');
         } else {
             // Handle error, redirect back or display a message
             return redirect()->back()->withInput()->with('error', 'Error: Jumlah barang atau barang terpilih tidak valid');
@@ -122,8 +122,8 @@ class Permintaan extends BaseController
     public function detail($kode_permintaan)
     {
         $userId = $this->session->get('id');
-        $nama   = $this->session->get('nama');
-        $level  = $this->session->get('level');
+        $nama = $this->session->get('nama');
+        $level = $this->session->get('level');
 
         $permintaanModel = new \App\Models\PermintaanBarang();
 
@@ -263,7 +263,7 @@ class Permintaan extends BaseController
             // $updatedStokBarang array (1)
             // ⇄stok_barang => integer 21
             $barangModel->update($kodeBarang, $updatedStokBarang);
-            dd($stokBaru);
+            // dd($stokBaru);
         }
 
         // Redirect pengguna ke halaman yang sesuai setelah proses selesai

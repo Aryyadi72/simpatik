@@ -1,75 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
+    <title>Login - SIMPATIK</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="POS - Bootstrap Admin Template">
-    <meta name="keywords"
-        content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
-    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Login - Pos admin template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/favicon1.png') ?>">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>login_assets/css/style.css">
 
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="account-page">
-    <div class="main-wrapper">
-        <div class="account-content">
-            <div class="login-wrapper">
-                <div class="login-content">
-                    <div class="login-userset">
-                        <div class="login-logo">
-                            <img src="assets/img/logo.png" alt="img">
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Login SIMPATIK</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <img src="<?= base_url() ?>login_assets/images/logo_sekolah.jpg" alt="" width="100"
+                                height="100">
                         </div>
-                        <form method="post" action="<?= site_url('auth-processLogin'); ?>">
-                            <div class="login-userheading">
-                                <h3>Login SIMPATIK</h3>
-                                <h4>Gunakan Username & Password untuk Login</h4>
+                        <h3 class="text-center mb-4">Login</h3>
+                        <form method="post" action="<?= site_url('auth-processLogin'); ?>" class="login-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control rounded-left" placeholder="Username"
+                                    name="username" required>
                             </div>
-                            <div class="form-login">
-                                <label>Username</label>
-                                <div class="form-addons">
-                                    <input type="text" placeholder="Masukkan username" name="username" required>
-                                    <img src="assets/img/icons/mail.svg" alt="img">
-                                </div>
+                            <div class="form-group d-flex">
+                                <input type="password" class="form-control rounded-left" placeholder="Password"
+                                    name="password" required>
                             </div>
-                            <div class="form-login">
-                                <label>Password</label>
-                                <div class="pass-group">
-                                    <input type="password" class="pass-input" placeholder="Masukkan password"
-                                        name="password" required>
-                                    <span class="fas toggle-password fa-eye-slash"></span>
-                                </div>
-                            </div>
-                            <div class="form-login">
-                                <button class="btn btn-login" type="submit">Login</button>
+                            <div class="form-group">
+                                <button type="submit"
+                                    class="form-control btn btn-primary rounded submit px-3">Login</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="login-img">
-                    <img src="assets/img/login.jpg" alt="img">
-                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="<?= base_url() ?>login_assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>login_assets/js/popper.js"></script>
+    <script src="<?= base_url() ?>login_assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>login_assets/js/main.js"></script>
 
-    <script src="assets/js/feather.min.js"></script>
-
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-
-    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

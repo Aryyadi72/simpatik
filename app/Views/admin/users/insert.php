@@ -1,14 +1,28 @@
 <!-- menghubungkan tampilan ini dengan tampilan admin layout -->
-<?= $this->extend('admin/layout/admin_layout');?>
+<?= $this->extend('admin/layout/admin_layout'); ?>
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
+
+<!-- Alert untuk menampilkan pesan suksess atau error -->
+<?php
+$success = session()->getFlashdata('success');
+$error = session()->getFlashdata('error');
+
+if (!empty($success)) {
+    echo "<script>alert('" . $success . "');</script>";
+}
+
+if (!empty($error)) {
+    echo "<script>alert('" . $error . "');</script>";
+}
+?>
 
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Tambah User</h4>
-                <h6>Form tambah user</h6>
+                <h4>Tambah Pengguna</h4>
+                <h6>Form tambah pengguna</h6>
             </div>
         </div>
 
@@ -70,7 +84,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                        <input type="submit" class="btn btn-submit me-2" value="submit">
+                            <input type="submit" class="btn btn-submit me-2" value="submit">
                             <a href="<?= base_url('users') ?>" class="btn btn-cancel">Cancel</a>
                         </div>
                     </div>
@@ -80,4 +94,4 @@
     </div>
 </div>
 <!-- Mengakhiri inisialisasi content pada halaman ini -->
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

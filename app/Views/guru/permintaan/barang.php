@@ -13,43 +13,14 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" action="<?= site_url('/permintaan-store') ?>">
-                <input type="hidden" name="pemohon" value="<?= $userId ?>">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a href="transferlist.html" class="btn btn-cancel">Cancel</a>
-                            <button class="btn btn-submit me-2">Submit</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <br>
+                    <input type="hidden" name="pemohon" value="<?= $userId ?>">
                     <div class="row">
                         <div class="table-top">
                             <div class="search-set">
-                                <div class="search-path">
-                                    <a class="btn btn-filter" id="filter_search">
-                                        <img src="assets/img/icons/filter.svg" alt="img">
-                                        <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                                    </a>
-                                </div>
                                 <div class="search-input">
-                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img"></a>
+                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                            alt="img"></a>
                                 </div>
-                            </div>
-                            <div class="wordset">
-                                <ul>
-                                    <li>
-                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                                src="assets/img/icons/pdf.svg" alt="img"></a>
-                                    </li>
-                                    <li>
-                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                                src="assets/img/icons/excel.svg" alt="img"></a>
-                                    </li>
-                                    <li>
-                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                                src="assets/img/icons/printer.svg" alt="img"></a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -75,7 +46,8 @@
                                     <!-- memanggil data dari controller Barang function index dan menampilkan datanya menggunakan perulangan -->
                                     <?php foreach ($data['barang'] as $barang): ?>
                                         <tr>
-                                            <input type="hidden" value="<?= $barang['kode_barang'] ?>" name="kode_barang" id="kode_barang">
+                                            <input type="hidden" value="<?= $barang['kode_barang'] ?>" name="kode_barang"
+                                                id="kode_barang">
                                             <td>
                                                 <?= $no++ ?>
                                             </td>
@@ -88,38 +60,48 @@
                                             <td>
                                                 <!-- Menampilkan gambar yang sudah di upload kedalam database -->
                                                 <?php if (!empty($barang['foto_barang'])): ?>
-                                                    <img src="<?= base_url($barang['foto_barang']) ?>" alt="Foto Barang" width="50">
+                                                    <img src="<?= base_url($barang['foto_barang']) ?>" alt="Foto Barang"
+                                                        width="50">
                                                 <?php else: ?>
                                                     <span>No Image</span>
                                                 <?php endif; ?>
                                             </td>
                                             <td>
                                                 <?php $stokTersedia = $barang['stok_barang'] ?>
-                                                    <?php if ($stokTersedia > 0): ?>
-                                                        <input type="number" name="jumlah[]" id="jumlah" required>
-                                                    <?php else: ?>
-                                                        <input type="number" disabled>
-                                                    <?php endif; ?>
+                                                <?php if ($stokTersedia > 0): ?>
+                                                    <input type="number" name="jumlah[]" id="jumlah" required>
+                                                <?php else: ?>
+                                                    <input type="number" disabled>
+                                                <?php endif; ?>
                                             </td>
                                             <td>
                                                 <?php $stokTersedia = $barang['stok_barang'] ?>
-                                                    <?php if ($stokTersedia > 0): ?>
-                                                        <label class="checkboxs">
-                                                            <input type="checkbox" name="barang_terpilih[]" value="<?= $barang['kode_barang']; ?>" required>
-                                                            <span class="checkmarks"></span>
-                                                        </label>
-                                                    <?php else: ?>
-                                                        <label class="checkboxs">
-                                                            <input disabled>
-                                                            <span class="checkmarks"></span>
-                                                        </label>
-                                                    <?php endif; ?>
+                                                <?php if ($stokTersedia > 0): ?>
+                                                    <label class="checkboxs">
+                                                        <input type="checkbox" name="barang_terpilih[]"
+                                                            value="<?= $barang['kode_barang']; ?>" required>
+                                                        <span class="checkmarks"></span>
+                                                    </label>
+                                                <?php else: ?>
+                                                    <label class="checkboxs">
+                                                        <input disabled>
+                                                        <span class="checkmarks"></span>
+                                                    </label>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                         <!-- Mengakhiri perulangan -->
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="transferlist.html" class="btn btn-cancel">Cancel</a>
+                            <button class="btn btn-submit me-2">Submit</button>
                         </div>
                     </div>
                 </form>

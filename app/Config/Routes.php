@@ -47,9 +47,11 @@ $routes->get('users/delete/(:num)', 'Users::delete/$1', ['as' => 'delete_users']
 $routes->get('/masuk-history', 'BarangMasuk::index');
 $routes->get('/masuk-history-add', 'BarangMasuk::add');
 $routes->post('/masuk-history-store', 'BarangMasuk::store');
+$routes->get('/exportExcel', 'BarangMasuk::exportExcel', ['as' => 'exportExcel']);
 
 // Routing untuk menuju halaman riwayat barang keluar
 $routes->get('/keluar-history', 'BarangKeluar::index');
+$routes->get('/exportBarangKeluar', 'BarangKeluar::exportBarangKeluar', ['as' => 'exportBarangKeluar']);
 
 
 // Routing Guru

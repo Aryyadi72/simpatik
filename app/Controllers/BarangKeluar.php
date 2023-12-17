@@ -23,7 +23,47 @@ class BarangKeluar extends BaseController
         $userId = $this->session->get('id');
         $nama = $this->session->get('nama');
         $level = $this->session->get('level');
+
+        $barangKeluarModel = new \App\Models\BarangKeluar();
+        $data['barang'] = $barangKeluarModel->getBarangKeluar();
+
         $title['title'] = "Riwayat Barang Keluar - Admin";
-        return view ('admin/barang-keluar/index', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
+        return view('admin/barang-keluar/index', ['title' => $title, 'userId' => $userId, 'nama' => $nama, 'level' => $level, 'data' => $data]);
+    }
+
+    public function exportBarangKeluar()
+    {
+        $barangKeluarModel = new \App\Models\BarangKeluar();
+        $data['barang'] = $barangKeluarModel->getBarangKeluar();
+
+        // Inisialisasi objek Spreadsheet dari PhpSpreadsheet
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Tanggal')
+            ->setCellValue('B1', 'Barang')
+            ->setCellValue('C1', 'Jumlah')
+            ->setCellValue('D1', 'Pemohon');
+
+        $column = 2;
+        // tulis data mobil ke cell
+        foreach ($data['barang'] as $data) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $data['tanggal_keluar'])
+                ->setCellValue('B' . $column, $data['nama_barang'])
+                ->setCellValue('C' . $column, $data['jumlah'])
+                ->setCellValue('D' . $column, $data['nama']);
+            $column++;
+        }
+
+        // tulis dalam format .xlsx
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $filename = 'export_barang_keluar_' . date('YmdHis') . '.xlsx';
+
+        // Redirect hasil generate xlsx ke web client
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 }

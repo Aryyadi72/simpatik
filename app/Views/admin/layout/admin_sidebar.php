@@ -8,24 +8,23 @@
                             Dashboard</span> </a>
                 </li>
                 <li>
+                    <a href="<?= base_url('users') ?>"><img src="assets/img/icons/users1.svg" alt="img"><span>
+                            Pengguna</span> </a>
+                </li>
+                <li>
+                    <a href="<?= base_url('barang') ?>"><img src="<?= base_url() ?>assets/img/icons/product.svg"
+                            alt="img"><span>
+                            Barang</span> </a>
+                </li>
+                <li>
                     <a href="<?= base_url('permintaan-masuk') ?>"><img
                             src="<?= base_url() ?>assets/img/icons/transfer1.svg" alt="img"><span> Permintaan
                             Masuk</span> </a>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><i data-feather="layers"></i><span> Master</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="<?= base_url('barang') ?>">Barang</a></li>
-                        <li><a href="<?= base_url('users') ?>">User</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a href="javascript:void(0);"><img src="<?= base_url() ?>assets/img/icons/product.svg"
-                            alt="img"><span> Barang</span>
+                    <a href="javascript:void(0);"><i data-feather="file"></i><span> Riwayat</span>
                         <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="<?= base_url('masuk-history-add') ?>">Form Barang Masuk</a></li>
                         <li><a href="<?= base_url('masuk-history') ?>">Riwayat Barang Masuk</a></li>
                         <li><a href="<?= base_url('keluar-history') ?>">Riwayat Barang Keluar</a></li>
                     </ul>

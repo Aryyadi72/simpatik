@@ -42,9 +42,8 @@ class BarangMasuk extends Model
     public function getAllBarang()
     {
         $builder = $this->db->table('barang_masuk');
-        $builder->select('barang_masuk.*, barang.*, users.*');
+        $builder->select('barang_masuk.*, barang.*');
         $builder->join('barang', 'barang_masuk.kode_barang = barang.kode_barang', 'left');
-        $builder->join('users', 'barang_masuk.inputer = users.id', 'left');
         $builder->orderBy('barang_masuk.id', 'DESC');
         return $builder->get()->getResultArray();
     }

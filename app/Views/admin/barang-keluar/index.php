@@ -1,7 +1,7 @@
 <!-- menghubungkan tampilan ini dengan tampilan admin layout -->
-<?= $this->extend('admin/layout/admin_layout');?>
+<?= $this->extend('admin/layout/admin_layout'); ?>
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="main-wrapper">
     <div class="page-wrapper pagehead">
@@ -18,26 +18,18 @@
                         <div class="card-body">
                             <div class="table-top">
                                 <div class="search-set">
-                                    <div class="search-path">
-                                        <a class="btn btn-filter" id="filter_search">
-                                            <img src="assets/img/icons/filter.svg" alt="img">
-                                            <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                                        </a>
-                                    </div>
                                     <div class="search-input">
-                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img"></a>
+                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                                alt="img"></a>
                                     </div>
                                 </div>
                                 <div class="wordset">
                                     <ul>
                                         <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="assets/img/icons/printer.svg" alt="img"></a>
+                                            <a href="<?= site_url('exportBarangKeluar') ?>" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Export to Excel">
+                                                <img src="assets/img/icons/excel.svg" alt="Excel">
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -50,19 +42,32 @@
                                             <th>Tanggal</th>
                                             <th>Barang</th>
                                             <th>Jumlah</th>
-                                            <th>Inputer</th>
                                             <th>Pemohon</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($data['barang'] as $bk):
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $no++ ?>
+                                                </td>
+                                                <td>
+                                                    <?= $bk['tanggal_keluar'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $bk['nama_barang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $bk['jumlah'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $bk['nama'] ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -74,4 +79,4 @@
     </div>
 </div>
 <!-- Mengakhiri inisialisasi content pada halaman ini -->
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

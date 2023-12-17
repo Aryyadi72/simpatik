@@ -3,6 +3,20 @@
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content'); ?>
 
+<!-- Alert untuk menampilkan pesan suksess atau error -->
+<?php
+$success = session()->getFlashdata('success');
+$error = session()->getFlashdata('error');
+
+if (!empty($success)) {
+    echo "<script>alert('" . $success . "');</script>";
+}
+
+if (!empty($error)) {
+    echo "<script>alert('" . $error . "');</script>";
+}
+?>
+
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
@@ -21,7 +35,8 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <input type="text" name="nama_barang" id="nama_barang" value="<?= $data['barang']['nama_barang'] ?>">
+                                <input type="text" name="nama_barang" id="nama_barang"
+                                    value="<?= $data['barang']['nama_barang'] ?>">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-12">
@@ -44,8 +59,9 @@
                                     <span class="custom-file-container__custom-file__custom-file-control"></span>
                                 </label>
                                 <div class="custom-file-container__image-preview">
-                                    <?php if (!empty($data['barang']['foto_barang'])) : ?>
-                                        <img src="<?= base_url($data['barang']['foto_barang']); ?>" alt="Preview Image" style="height:200px;width:200px;">
+                                    <?php if (!empty($data['barang']['foto_barang'])): ?>
+                                        <img src="<?= base_url($data['barang']['foto_barang']); ?>" alt="Preview Image"
+                                            style="height:200px;width:200px;">
                                     <?php endif; ?>
                                 </div>
                             </div>

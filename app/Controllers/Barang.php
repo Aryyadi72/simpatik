@@ -100,13 +100,14 @@ class Barang extends BaseController
 
             if ($barangModel) {
                 return redirect()->to(base_url('barang'))
-                    ->with('success', 'Image uploaded');
+                    ->with('success', 'Data berhasil ditambahkan');
             } else {
-                return redirect()->back();
+                return redirect()->back()->withInput()->with('error', 'Data gagal ditambahkan.');
             }
 
         }
         return redirect()->back();
+        ;
 
     }
 
@@ -152,7 +153,7 @@ class Barang extends BaseController
 
         $barangModel->update($id, $updatedData);
 
-        return redirect()->to(base_url('barang'))->with('success', 'Data updated successfully');
+        return redirect()->to(base_url('barang'))->with('success', 'Data berhasil diperbarui');
     }
 
     // Function untuk menghapus data barang

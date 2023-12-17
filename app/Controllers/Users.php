@@ -28,7 +28,7 @@ class Users extends BaseController
         // Judul untuk halaman
         $title['title'] = "Users - Admin";
         // mengarahkan tampilan ke halaman users yang berada di dalam folder users dan folder index
-        return view ('admin/users/index', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
+        return view('admin/users/index', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
 
     // Function untuk menampilkan halaman tambah data users
