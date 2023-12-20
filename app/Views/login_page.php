@@ -19,17 +19,16 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Login SIMPATIK</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="login-wrap p-4 p-md-5">
                         <div class="icon d-flex align-items-center justify-content-center">
-                            <img src="<?= base_url() ?>login_assets/images/logo_sekolah.jpg" alt="" width="100"
+                            <img src="<?= base_url() ?>login_assets/images/logo_sekolah.png" alt="" width="100"
                                 height="100">
-                        </div>
-                        <h3 class="text-center mb-4">Login</h3>
+                        </div><br>
+                        <h5 class="text-center mb-4">Sistem Informasi Manajemen Persediaan Alat Tulis Kantor Pada SMK Negeri 2 Pelaihari</h5>
                         <form method="post" action="<?= site_url('auth-processLogin'); ?>" class="login-form">
                             <div class="form-group">
                                 <input type="text" class="form-control rounded-left" placeholder="Username"

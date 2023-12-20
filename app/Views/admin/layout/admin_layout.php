@@ -41,6 +41,26 @@
             <script src="<?= base_url('') ?>assets/js/bootstrap-datetimepicker.min.js"></script>
             <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.min.js"></script>
             <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.js"></script>
+            <script>
+                $(document).ready(function() {
+                    var url = window.location.href;
+                    
+                    // Menghapus class 'active' dari semua item menu
+                    $('#sidebar-menu li').removeClass('active');
+                    
+                    // Menambahkan class 'active' ke item menu yang dipilih berdasarkan URL
+                    $('#sidebar-menu a').each(function() {
+                        // Memeriksa apakah URL cocok dengan URL pada item menu
+                        if (this.href === url) {
+                            // Menambahkan class 'active' ke parent 'li' dari item menu yang cocok
+                            $(this).closest('li').addClass('active');
+                            
+                            // Untuk submenu: Menambahkan class 'active' ke parent '.submenu'
+                            $(this).parents('.submenu').addClass('active');
+                        }
+                    });
+                });
+            </script>
 
     </body>
 </html>

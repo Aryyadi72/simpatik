@@ -23,7 +23,6 @@ if (!empty($error)) {
             <div class="page-header">
                 <div class="page-title">
                     <h4>Riwayat Barang Masuk</h4>
-                    <h6>Tabel riwayat barang masuk</h6>
                 </div>
                 <div class="page-btn">
                     <a href="<?= base_url('masuk-history-add') ?>" class="btn btn-added"><img
@@ -44,10 +43,7 @@ if (!empty($error)) {
                                 <div class="wordset">
                                     <ul>
                                         <li>
-                                            <a href="<?= site_url('exportExcel') ?>" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Export to Excel">
-                                                <img src="assets/img/icons/excel.svg" alt="Excel">
-                                            </a>
+                                            <a href="<?= site_url('/pdf-generate') ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -58,6 +54,7 @@ if (!empty($error)) {
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal</th>
+                                            <th>Waktu</th>
                                             <th>Barang</th>
                                             <th>Jumlah</th>
                                         </tr>
@@ -70,7 +67,10 @@ if (!empty($error)) {
                                                     <?= $no++ ?>
                                                 </td>
                                                 <td>
-                                                    <?= $barang['tanggal_masuk'] ?>
+                                                    <?= \Carbon\Carbon::parse($barang['tanggal_masuk'])->format('d-m-Y') ?>
+                                                </td>
+                                                <td>
+                                                    <?= \Carbon\Carbon::parse($barang['tanggal_masuk'])->format('h:i') ?>
                                                 </td>
                                                 <td>
                                                     <?= $barang['nama_barang'] ?>

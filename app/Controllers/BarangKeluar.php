@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use Dompdf\Dompdf;
 
 class BarangKeluar extends BaseController
 {
@@ -65,5 +66,27 @@ class BarangKeluar extends BaseController
         header('Cache-Control: max-age=0');
 
         $writer->save('php://output');
+    }
+
+    public function generate()
+    {
+        $barangKeluarModel = new \App\Models\BarangKeluar();
+        $data['barang'] = $barangKeluarModel->getBarangKeluar();
+        $filename = date('y-m-d-H-i-s'). '-laporan-barang-keluar';
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+
+        // load HTML content
+        $dompdf->loadHtml(view('admin/barang-keluar/pdf_view', ['data' => $data]));
+
+        // (optional) setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // render html as PDF
+        $dompdf->render();
+
+        // output the generated pdf
+        $dompdf->stream($filename);
     }
 }

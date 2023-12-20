@@ -9,7 +9,6 @@
             <div class="page-header">
                 <div class="page-title">
                     <h4>Riwayat Barang Keluar</h4>
-                    <h6>Tabel riwayat barang keluar</h6>
                 </div>
             </div>
             <div class="row">
@@ -26,10 +25,7 @@
                                 <div class="wordset">
                                     <ul>
                                         <li>
-                                            <a href="<?= site_url('exportBarangKeluar') ?>" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Export to Excel">
-                                                <img src="assets/img/icons/excel.svg" alt="Excel">
-                                            </a>
+                                            <a href="<?= site_url('/pdf-generate-barang-keluar') ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
                                         </li>
                                     </ul>
                                 </div>

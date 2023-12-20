@@ -8,8 +8,7 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>List Permintaan Masuk</h4>
-                    <h6>Tabel list permintaan masuk</h6>
+                    <h4>Permintaan Masuk</h4>
                 </div>
             </div>
             <div class="row">
@@ -18,32 +17,10 @@
                         <div class="card-body">
                             <div class="table-top">
                                 <div class="search-set">
-                                    <div class="search-path">
-                                        <a class="btn btn-filter" id="filter_search">
-                                            <img src="assets/img/icons/filter.svg" alt="img">
-                                            <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                                        </a>
-                                    </div>
                                     <div class="search-input">
                                         <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
                                                 alt="img"></a>
                                     </div>
-                                </div>
-                                <div class="wordset">
-                                    <ul>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                                    src="assets/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                                    src="assets/img/icons/excel.svg" alt="img"></a>
-                                        </li>
-                                        <li>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                                    src="assets/img/icons/printer.svg" alt="img"></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -52,6 +29,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal</th>
+                                            <th>Waktu</th>
                                             <th>Nama</th>
                                             <th>Barang</th>
                                             <th>Status</th>
@@ -71,7 +49,10 @@
                                                     <?= $no++ ?>
                                                 </td>
                                                 <td>
-                                                    <?= $pm['tanggal_permintaan'] ?>
+                                                    <?= \Carbon\Carbon::parse($pm['tanggal_permintaan'])->format('d-m-Y') ?>
+                                                </td>
+                                                <td>
+                                                    <?= \Carbon\Carbon::parse($pm['tanggal_permintaan'])->format('h:i') ?>
                                                 </td>
                                                 <td>
                                                     <?= $pm['nama'] ?>

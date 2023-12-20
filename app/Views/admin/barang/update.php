@@ -21,8 +21,7 @@ if (!empty($error)) {
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Tambah Barang</h4>
-                <h6>Form tambah barang</h6>
+                <h4>Update Barang</h4>
             </div>
         </div>
 
@@ -39,15 +38,7 @@ if (!empty($error)) {
                                     value="<?= $data['barang']['nama_barang'] ?>">
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Jenis Barang</label>
-                                <select class="select" name="jenis_barang" id="jenis_barang">
-                                    <option selected disabled>Pilih Jenis Barang</option>
-                                    <option value="Alat Tulis" <?= ($data['barang']['jenis_barang'] == 'Alat Tulis') ? 'selected' : ''; ?>>Alat Tulis</option>
-                                </select>
-                            </div>
-                        </div>
+                        <input type="hidden" name="jenis_barang" id="jenis_barang" value="<?= $data['barang']['jenis_barang'] ?>">
                         <div class="col-lg-12">
                             <div class="custom-file-container" data-upload-id="myFirstImage">
                                 <label>Upload (Single File) <a href="javascript:void(0)"
@@ -67,8 +58,8 @@ if (!empty($error)) {
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-submit me-2" value="submit">
                             <a href="<?= base_url('barang') ?>" class="btn btn-cancel">Cancel</a>
+                            <input type="submit" class="btn btn-submit me-2" value="submit">
                         </div>
                     </div>
                 </form>

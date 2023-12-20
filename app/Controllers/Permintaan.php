@@ -304,5 +304,4 @@ class Permintaan extends BaseController
         // Tampilkan form untuk mengedit status dan keterangan
         return view('admin/permintaan/batal', ['title' => $title, 'data' => $data, 'userId' => $userId, 'nama' => $nama, 'level' => $level]);
     }
-
 }

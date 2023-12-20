@@ -7,7 +7,6 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>Permintaan Barang</h4>
-                <h6>Tambahkan permintaan barang.</h6>
             </div>
         </div>
         <div class="card">
@@ -69,7 +68,7 @@
                                             <td>
                                                 <?php $stokTersedia = $barang['stok_barang'] ?>
                                                 <?php if ($stokTersedia > 0): ?>
-                                                    <input type="number" name="jumlah[]" id="jumlah" required>
+                                                    <input type="number" name="jumlah[]" id="jumlah">
                                                 <?php else: ?>
                                                     <input type="number" disabled>
                                                 <?php endif; ?>
@@ -79,7 +78,7 @@
                                                 <?php if ($stokTersedia > 0): ?>
                                                     <label class="checkboxs">
                                                         <input type="checkbox" name="barang_terpilih[]"
-                                                            value="<?= $barang['kode_barang']; ?>" required>
+                                                            value="<?= $barang['kode_barang']; ?>">
                                                         <span class="checkmarks"></span>
                                                     </label>
                                                 <?php else: ?>

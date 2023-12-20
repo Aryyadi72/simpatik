@@ -22,8 +22,7 @@ if (!empty($error)) {
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>List Barang</h4>
-                    <h6>Tabel list barang</h6>
+                    <h4>Barang</h4>
                 </div>
                 <div class="page-btn">
                     <a href="<?= base_url('barang-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg"
@@ -49,10 +48,9 @@ if (!empty($error)) {
                                             <th>No</th>
                                             <th>Kode</th>
                                             <th>Barang</th>
-                                            <th>Jenis</th>
                                             <th>Stok</th>
                                             <th>Foto</th>
-                                            <th>Action</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,9 +67,6 @@ if (!empty($error)) {
                                                 </td>
                                                 <td>
                                                     <?= $barang['nama_barang'] ?>
-                                                </td>
-                                                <td>
-                                                    <?= $barang['jenis_barang'] ?>
                                                 </td>
                                                 <td>
                                                     <?= $barang['stok_barang'] ?>

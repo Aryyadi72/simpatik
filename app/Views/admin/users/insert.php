@@ -22,7 +22,6 @@ if (!empty($error)) {
         <div class="page-header">
             <div class="page-title">
                 <h4>Tambah Pengguna</h4>
-                <h6>Form tambah pengguna</h6>
             </div>
         </div>
 
@@ -84,8 +83,8 @@ if (!empty($error)) {
                         </div>
 
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-submit me-2" value="submit">
                             <a href="<?= base_url('users') ?>" class="btn btn-cancel">Cancel</a>
+                            <input type="submit" class="btn btn-submit me-2" value="submit">
                         </div>
                     </div>
                 </form>
