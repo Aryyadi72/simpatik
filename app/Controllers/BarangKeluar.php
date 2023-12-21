@@ -68,10 +68,17 @@ class BarangKeluar extends BaseController
         $writer->save('php://output');
     }
 
-    public function generate()
+    public function generate($month = null)
     {
         $barangKeluarModel = new \App\Models\BarangKeluar();
-        $data['barang'] = $barangKeluarModel->getBarangKeluar();
+        $data = [];
+
+        if ($month !== null) {
+            $data['barang'] = $barangKeluarModel->getBarangKeluarByMonth($month);
+        } else {
+            $data['barang'] = $barangKeluarModel->getBarangKeluar();
+        }
+        
         $filename = date('y-m-d-H-i-s'). '-laporan-barang-keluar';
 
         // instantiate and use the dompdf class

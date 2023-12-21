@@ -41,11 +41,23 @@ if (!empty($error)) {
                                     </div>
                                 </div>
                                 <div class="wordset">
-                                    <ul>
-                                        <li>
-                                            <a href="<?= site_url('/pdf-generate') ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                    </ul>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cetak</button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/1') ?>">Januari</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/2') ?>">Februari</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/3') ?>">Maret</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/4') ?>">April</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/5') ?>">Mei</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/6') ?>">Juni</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/7') ?>">Juli</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/8') ?>">Agustus</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/9') ?>">September</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/10') ?>">Oktober</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/11') ?>">November</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate/12') ?>">Desember</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="table-responsive">

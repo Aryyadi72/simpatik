@@ -18,6 +18,7 @@
             <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome/css/all.min.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
             <link rel="stylesheet" href="<?= base_url('assets/plugins/toastr/toatr.css') ?>">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.min.css">
         </head>
         <body>
             <?= $this->include('admin/layout/admin_header');?>
@@ -41,6 +42,7 @@
             <script src="<?= base_url('') ?>assets/js/bootstrap-datetimepicker.min.js"></script>
             <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.min.js"></script>
             <script src="<?= base_url('') ?>assets/plugins/toastr/toastr.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.1/dist/sweetalert2.all.min.js"></script>
             <script>
                 $(document).ready(function() {
                     var url = window.location.href;
@@ -61,6 +63,27 @@
                     });
                 });
             </script>
-
+            <script>
+                $(function(){
+                    <?php if(session()->has("success")) { ?>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: '<?= session("success") ?>'
+                        })
+                    <?php } ?>
+                });
+            </script>
+            <script>
+                $(function(){
+                    <?php if(session()->has("error")) { ?>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: '<?= session("error") ?>'
+                        })
+                    <?php } ?>
+                });
+            </script>
     </body>
 </html>

@@ -68,7 +68,8 @@ class BarangMasuk extends BaseController
         $barangModel->update($barang['id'], ['stok_barang' => $stokBaru]);
 
         // Mengarahkan tampilan ke halaman users dengan menggunakan routing users
-        return redirect()->to(site_url('/barang'))->with('success', 'Data berhasil ditambahkan');
+        session()->setFlashdata("success", "Berhasil disimpan!");
+        return redirect()->to(site_url('/barang'));
     }
 
     public function exportExcel()
@@ -112,10 +113,18 @@ class BarangMasuk extends BaseController
         return view('admin/barang-masuk/pdf_view', ['data' => $data]);
     }
 
-    public function generate()
+    public function generate($month = null)
     {
         $barangMasukModel = new \App\Models\BarangMasuk();
-        $data['barang'] = $barangMasukModel->getAllBarang();
+        $data = [];
+
+        if ($month !== null) {
+            $data['barang'] = $barangMasukModel->getBarangByMonth($month);
+        } else {
+            // Jika $month tidak ada, jalankan fungsi getAllBarang()
+            $data['barang'] = $barangMasukModel->getAllBarang();
+        }
+
         $filename = date('y-m-d-H-i-s'). '-laporan-barang-masuk';
 
         // instantiate and use the dompdf class

@@ -99,16 +99,15 @@ class Barang extends BaseController
             $barangModel->insert($uploadedImage);
 
             if ($barangModel) {
-                return redirect()->to(base_url('barang'))
-                    ->with('success', 'Data berhasil ditambahkan');
+                session()->setFlashdata("success", "Berhasil disimpan!");
+                return redirect()->to(base_url('barang'));
             } else {
-                return redirect()->back()->withInput()->with('error', 'Data gagal ditambahkan.');
+                session()->setFlashdata("error", "Data gagal ditambahkan.");
+                return redirect()->back();
             }
 
         }
         return redirect()->back();
-        ;
-
     }
 
     // Function untuk menampilkan halaman update barang
@@ -152,8 +151,8 @@ class Barang extends BaseController
         }
 
         $barangModel->update($id, $updatedData);
-
-        return redirect()->to(base_url('barang'))->with('success', 'Data berhasil diperbarui');
+        session()->setFlashdata("success", "Berhasil disimpan!");
+        return redirect()->to(base_url('barang'));
     }
 
     // Function untuk menghapus data barang
@@ -173,8 +172,8 @@ class Barang extends BaseController
             // dd($pathToFile);
 
             $barangModel->delete($id);
-
-            return redirect()->to(base_url('barang'))->with('success', 'Data berhasil dihapus');
+            session()->setFlashdata("success", "Berhasil disimpan!");
+            return redirect()->to(base_url('barang'));
         }
 
     }

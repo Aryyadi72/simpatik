@@ -55,4 +55,19 @@ class BarangMasuk extends Model
         $builder->join('users', 'barang_masuk.inputer = users.id', 'left');
         return $builder->get()->getResultArray();
     }
+
+    public function getBarangByMonth($month)
+    {
+        $builder = $this->db->table('barang_masuk');
+        $builder->select('barang_masuk.*, barang.*');
+        $builder->join('barang', 'barang_masuk.kode_barang = barang.kode_barang', 'left');
+        
+        if ($month !== null) {
+            $builder->where('MONTH(barang_masuk.tanggal_masuk)', $month);
+        }
+        
+        $builder->orderBy('barang_masuk.id', 'DESC');
+        return $builder->get()->getResultArray();
+    }
+
 }

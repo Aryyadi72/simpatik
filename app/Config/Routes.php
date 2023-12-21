@@ -48,12 +48,12 @@ $routes->get('/masuk-history', 'BarangMasuk::index');
 $routes->get('/masuk-history-add', 'BarangMasuk::add');
 $routes->post('/masuk-history-store', 'BarangMasuk::store');
 $routes->get('/exportExcel', 'BarangMasuk::exportExcel', ['as' => 'exportExcel']);
-$routes->get('/pdf-generate', 'BarangMasuk::generate');
+$routes->get('/pdf-generate/(:num)', 'BarangMasuk::generate/$1');
 
 // Routing untuk menuju halaman riwayat barang keluar
 $routes->get('/keluar-history', 'BarangKeluar::index');
 $routes->get('/exportBarangKeluar', 'BarangKeluar::exportBarangKeluar', ['as' => 'exportBarangKeluar']);
-$routes->get('/pdf-generate-barang-keluar', 'BarangKeluar::generate');
+$routes->get('/pdf-generate-barang-keluar/(:num)', 'BarangKeluar::generate/$1');
 
 
 // Routing Guru

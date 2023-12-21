@@ -20,7 +20,7 @@
                             <input type="hidden" name="status" id="status" value="dibatalkan">
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea class="form-control" name="keterangan" id="keterangan"><?= $data['permintaan']['keterangan'] ?></textarea>
+                                <textarea class="form-control" name="keterangan" id="keterangan" placeholder="(Isi keterangan disini)" required></textarea>
                             </div>
                         </div>
                     </div>

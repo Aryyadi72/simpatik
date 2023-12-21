@@ -57,19 +57,23 @@ class Users extends BaseController
 
         // Cek apakah NIK, Email, Phone, dan Username sudah ada
         if ($userModel->isExists(['nik' => $nik])) {
-            return redirect()->back()->withInput()->with('error', 'NIK sudah digunakan.');
+            session()->setFlashdata("error", "NIK sudah digunakan.");
+            return redirect()->back();
         }
 
         if ($userModel->isExists(['email' => $email])) {
-            return redirect()->back()->withInput()->with('error', 'Email sudah digunakan.');
+            session()->setFlashdata("error", "Email sudah digunakan.");
+            return redirect()->back();
         }
 
         if ($userModel->isExists(['no_hp' => $phone])) {
-            return redirect()->back()->withInput()->with('error', 'Nomor HP sudah digunakan.');
+            session()->setFlashdata("error", "Nomor HP sudah digunakan.");
+            return redirect()->back();
         }
 
         if ($userModel->isExists(['username' => $username])) {
-            return redirect()->back()->withInput()->with('error', 'Username sudah digunakan.');
+            session()->setFlashdata("error", "Username sudah digunakan.");
+            return redirect()->back();
         }
 
         // Hash password sebelum menyimpan ke database
@@ -91,7 +95,8 @@ class Users extends BaseController
         $userModel->insert($data);
 
         // Redirect ke halaman lain atau tampilkan pesan sukses
-        return redirect()->to(site_url('/users'))->with('success', 'Data user berhasil ditambahkan.');
+        session()->setFlashdata("success", "Berhasil disimpan!");
+        return redirect()->to(site_url('/users'));
     }
 
     public function updateForm($id)
@@ -144,7 +149,8 @@ class Users extends BaseController
         // Update data ke dalam database
         $userModel->update($id, $data);
 
-        return redirect()->to('/users')->with('success', 'Data user berhasil diupdate.');
+        session()->setFlashdata("success", "Berhasil disimpan!");
+        return redirect()->to('/users');
     }
 
     public function delete($id)
@@ -153,11 +159,13 @@ class Users extends BaseController
         $userData = $userModel->find($id);
 
         if (empty($userData)) {
-            return redirect()->to('/users')->with('error', 'User tidak ditemukan.');
+            session()->setFlashdata("error", "User tidak ditemukan.");
+            return redirect()->to('/users');
         }
 
         $userModel->delete($id);
 
-        return redirect()->to('/users')->with('success', 'Data user berhasil dihapus.');
+        session()->setFlashdata("success", "Berhasil disimpan!");
+        return redirect()->to('/users');
     }
 }

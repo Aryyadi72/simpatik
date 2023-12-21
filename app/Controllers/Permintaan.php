@@ -111,11 +111,11 @@ class Permintaan extends BaseController
 
                 $permintaanModel->insert($data);
             }
-
-            return redirect()->to(site_url('/permintaan-guru'))->with('success', 'Pengajuan berhasil.');
+            session()->setFlashdata("success", "Berhasil disimpan!");
+            return redirect()->to(site_url('/permintaan-guru'));
         } else {
-            // Handle error, redirect back or display a message
-            return redirect()->back()->withInput()->with('error', 'Error: Jumlah barang atau barang terpilih tidak valid');
+            session()->setFlashdata("error", "Jumlah barang atau barang terpilih tidak valid");
+            return redirect()->back();
         }
     }
 
@@ -176,9 +176,11 @@ class Permintaan extends BaseController
 
             // Melakukan validasi jika data berhasil di-update
             if ($permintaanModel->update($id, $updatedData)) {
-                return redirect()->to(site_url('/permintaan-masuk'))->with('success', 'Data berhasil di-update');
+                session()->setFlashdata("success", "Berhasil disimpan!");
+                return redirect()->to(site_url('/permintaan-masuk'));
             } else {
-                return redirect()->back()->withInput()->with('error', 'Gagal mengupdate data');
+                session()->setFlashdata("error", "Gagal mengupdate data");
+                return redirect()->back();
             }
         }
 
@@ -267,6 +269,7 @@ class Permintaan extends BaseController
         }
 
         // Redirect pengguna ke halaman yang sesuai setelah proses selesai
+        session()->setFlashdata("success", "Berhasil disimpan!");
         return redirect()->to(base_url('permintaan-masuk'));
     }
 
@@ -295,9 +298,11 @@ class Permintaan extends BaseController
 
             // Melakukan validasi jika data berhasil di-update
             if ($permintaanModel->update($id, $updatedData)) {
+                session()->setFlashdata("success", "Berhasil disimpan!");
                 return redirect()->to(site_url('/permintaan-masuk'))->with('success', 'Data berhasil di-update');
             } else {
-                return redirect()->back()->withInput()->with('error', 'Gagal mengupdate data');
+                session()->setFlashdata("error", "Gagal mengupdate data");
+                return redirect()->back();
             }
         }
 

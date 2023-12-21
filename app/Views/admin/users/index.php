@@ -3,27 +3,12 @@
 <!-- Menginisialisasi bahwa halaman ini adalah content -->
 <?= $this->section('content'); ?>
 
-<!-- Alert untuk menampilkan pesan suksess atau error -->
-<?php
-$success = session()->getFlashdata('success');
-$error = session()->getFlashdata('error');
-
-if (!empty($success)) {
-    echo "<script>alert('" . $success . "');</script>";
-}
-
-if (!empty($error)) {
-    echo "<script>alert('" . $error . "');</script>";
-}
-?>
-
 <div class="main-wrapper">
     <div class="page-wrapper pagehead">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
                     <h4>List Pengguna</h4>
-                    <h6>Tabel list pengguna aplikasi</h6>
                 </div>
                 <div class="page-btn">
                     <a href="<?= base_url('users-add') ?>" class="btn btn-added"><img src="assets/img/icons/plus.svg"

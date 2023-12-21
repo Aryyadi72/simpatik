@@ -23,11 +23,23 @@
                                     </div>
                                 </div>
                                 <div class="wordset">
-                                    <ul>
-                                        <li>
-                                            <a href="<?= site_url('/pdf-generate-barang-keluar') ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
-                                        </li>
-                                    </ul>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cetak</button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/1') ?>">Januari</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/2') ?>">Februari</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/3') ?>">Maret</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/4') ?>">April</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/5') ?>">Mei</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/6') ?>">Juni</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/7') ?>">Juli</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/8') ?>">Agustus</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/9') ?>">September</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/10') ?>">Oktober</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/11') ?>">November</a>
+                                            <a class="dropdown-item" href="<?= site_url('/pdf-generate-barang-keluar/12') ?>">Desember</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="table-responsive">

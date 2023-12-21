@@ -47,4 +47,19 @@ class BarangKeluar extends Model
         $builder->orderBy('barang_keluar.id', 'DESC');
         return $builder->get()->getResultArray();
     }
+
+    public function getBarangKeluarByMonth($month)
+    {
+        $builder = $this->db->table('barang_keluar');
+        $builder->select('barang_keluar.*, barang.*, users.*');
+        $builder->join('barang', 'barang_keluar.kode_barang = barang.kode_barang', 'left');
+        $builder->join('users', 'barang_keluar.pemohon = users.id', 'left');
+        
+        if ($month !== null) {
+            $builder->where('MONTH(barang_keluar.tanggal_keluar)', $month);
+        }
+        
+        $builder->orderBy('barang_keluar.id', 'DESC');
+        return $builder->get()->getResultArray();
+    }
 }
